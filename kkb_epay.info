@@ -1,0 +1,7 @@
+;
+
+name = KKB Epay
+description = Processes payments with the KKB 'Epay' authorization server - https://epay.kkb.kz/.
+core = 7.x
+package = Other
+

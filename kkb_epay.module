@@ -1,0 +1,7 @@
+<?php
+
+/**
+ * @file kkb_epay.module
+ *   KKB 'Epay' authorization server support.
+ */
+
