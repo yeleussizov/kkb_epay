@@ -5,3 +5,44 @@
  *   KKB 'Epay' authorization server support.
  */
 
+/**
+ * Prepares a complete valid form element ready to be submitted to the
+ * authorization server.
+ *
+ * Form is prepared and returned in a form of Drupal's renderable array.
+ * The caller party is free to modify the form before rendering it. The most
+ * common reason to modify the form is to add/modify submit buttons or some
+ * textual annotations.
+ *
+ * @warning
+ *   The returned form is not a valid Drupal form that can be submitted back
+ *   to the site and handled by drupal_build_form() function. This form is
+ *   intended to be submitted only directly to the authorization server.
+ *
+ * @return
+ *   Complete definition of a billing form as a renderable array.
+ */
+function kkb_epay_create_billing_statement() {
+  $form = array();
+
+  return $form;
+}
+
+/**
+ * Implements hook_menu().
+ */
+function kkb_epay_menu() {
+  $items = array();
+
+  return $items;
+}
+
+/**
+ * Implements hook_theme().
+ */
+function kkb_epay_theme($existing, $type, $theme, $path) {
+  $hooks = array();
+
+  return $hooks;
+}
+
