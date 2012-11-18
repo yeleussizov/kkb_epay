@@ -7,6 +7,7 @@ package = Other
 
 files[] = classes/KkbEpay_DrupalKeyLoader.php
 files[] = classes/KkbEpay_Key.php
+files[] = classes/KkbEpay_KeyError.php
 files[] = classes/KkbEpay_KeyLoaderInterface.php
 files[] = classes/KkbEpay_Sign.php
 
