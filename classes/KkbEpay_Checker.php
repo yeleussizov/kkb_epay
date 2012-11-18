@@ -9,7 +9,7 @@ final class KkbEpay_Checker
   private $_certificate;
 
 
-  public function __construct(KkbEpay_BankCertificateInterface $cetrificate = NULL)
+  public function __construct(KkbEpay_BankCertificateInterface $certificate = NULL)
   {
     $resource = openssl_get_publickey(trim($certificate->getCertificate()));
     if (empty($resource)) {
