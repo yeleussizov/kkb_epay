@@ -5,3 +5,8 @@ description = Processes payments with the KKB 'Epay' authorization server - http
 core = 7.x
 package = Other
 
+files[] = classes/KkbEpay_DrupalKeyLoader.php
+files[] = classes/KkbEpay_Key.php
+files[] = classes/KkbEpay_KeyLoaderInterface.php
+files[] = classes/KkbEpay_Sign.php
+
