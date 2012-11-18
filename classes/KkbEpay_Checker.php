@@ -11,6 +11,10 @@ final class KkbEpay_Checker
 
   public function __construct(KkbEpay_BankCertificateInterface $certificate = NULL)
   {
+    if (empty($certificate)) {
+      $certificate = new KkbEpay_DefaultBankCertificate();
+    }
+
     $resource = openssl_get_publickey(trim($certificate->getCertificate()));
     if (empty($resource)) {
       throw new KkbEpay_Exception('Provided certificate could not be loaded by openssl_get_publickey().');
