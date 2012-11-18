@@ -1,5 +1,8 @@
 <?php
 
+/**
+ * Main signer of messages.
+ */
 final class KkbEpay_Sign
 {
 
@@ -54,6 +57,7 @@ final class KkbEpay_Sign
   {
     return base64_encode($this->sign($message));
   }
+
 
   private function _reverse($data)
   {
