@@ -15,12 +15,12 @@
  * textual annotations.
  *
  * @warning
- *   The returned form is not a valid Drupal form that can be submitted back
- *   to the site and handled by drupal_build_form() function. This form is
- *   intended to be submitted only directly to the authorization server.
+ *   The returned form is not a complete Drupal form that can be submitted back
+ *   to the site and handled by drupal_build_form() function. This form must
+ *   be submitted directly to the authorization server.
  *
  * @return
- *   Complete definition of a billing form as a renderable array.
+ *   Complete definition of a billing form in a form of a renderable array.
  */
 function kkb_epay_create_billing_statement() {
   $form = array();
