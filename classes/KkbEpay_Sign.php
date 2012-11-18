@@ -31,6 +31,11 @@ final class KkbEpay_Sign
     return $this->_reverse($signature);
   }
 
+  public function sign64($message)
+  {
+    return base64_encode($this->sign($message));
+  }
+
   private function _reverse($data)
   {
     return strrev($data);
