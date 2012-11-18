@@ -18,8 +18,21 @@ final class KkbEpay_Sign
     $this->_key = $resource;
   }
 
+  /**
+   * Signes given message with loaded private key.
+   *
+   * @param string @message
+   *   Message that must be signed as a string. Cannot be empty.
+   *
+   * @return
+   *   Signature as a binary string.
+   */
   public function sign($message)
   {
+    if (empty($message)) {
+      throw new KkbEpay_Exception('Message cannot be empty.');
+    }
+
     $signature = '';
     openssl_sign($message, $signature, $this->_key);
 
@@ -31,6 +44,10 @@ final class KkbEpay_Sign
     return $this->_reverse($signature);
   }
 
+  /**
+   * Signes the message with sign() method. and encodes signature with
+   * bas64 function.
+   */
   public function sign64($message)
   {
     return base64_encode($this->sign($message));
