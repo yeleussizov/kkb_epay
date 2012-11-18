@@ -113,7 +113,7 @@ final class KkbEpay_Key
     return $this->_key;
   }
 
-  public function getPasword()
+  public function getPassword()
   {
     return $this->_password;
   }
