@@ -51,13 +51,13 @@ final class KkbEpay_Key
   public function setKey($key)
   {
     if (!is_string($key)) {
-      throw new KkbEpay_KeyError('Key must be a string.');
+      throw new KkbEpay_KeyException('Key must be a string.');
     }
     if (substr($key, 0, 31) != '-----BEGIN RSA PRIVATE KEY-----') {
-      throw new KkbEpay_KeyError('Key does not start a correct RSA key declaration.');
+      throw new KkbEpay_KeyException('Key does not start a correct RSA key declaration.');
     }
     if (substr($key, -29) != '-----END RSA PRIVATE KEY-----') {
-      throw new KkbEpay_KeyError('Key does not end a correct RSA key declaration.');
+      throw new KkbEpay_KeyException('Key does not end a correct RSA key declaration.');
     }
     $this->_key = trim($key);
     return $this;
@@ -66,7 +66,7 @@ final class KkbEpay_Key
   public function setPassword($pwd)
   {
     if (!is_string($pwd)) {
-      throw new KkbEpay_KeyError('Password must be a string.');
+      throw new KkbEpay_KeyException('Password must be a string.');
     }
     $this->_password = $pwd;
     return $this;
@@ -75,10 +75,10 @@ final class KkbEpay_Key
   public function setMerchantId($id)
   {
     if (!is_string($id)) {
-      throw new KkbEpay_KeyError('Merchant ID must be a string.');
+      throw new KkbEpay_KeyException('Merchant ID must be a string.');
     }
     if (!preg_match('/^[0-9]{8}$/', $id)) {
-      throw new KkbEpay_KeyError('Merchant ID does not much expected format.');
+      throw new KkbEpay_KeyException('Merchant ID does not much expected format.');
     }
     $this->_merchant_id = $id;
     return $this;
@@ -87,10 +87,10 @@ final class KkbEpay_Key
   public function setMerchantName($name)
   {
     if (!is_string($name)) {
-      throw new KkbEpay_KeyError('Merchant name must be a string.');
+      throw new KkbEpay_KeyException('Merchant name must be a string.');
     }
     if (!preg_match('/^[A-Za-z0-9 _-]{255}$/', $name)) {
-      throw new KkbEpay_KeyError('Merchant name does not much expected format.');
+      throw new KkbEpay_KeyException('Merchant name does not much expected format.');
     }
     $this->_merchant_name = $name;
     return $this;
@@ -99,10 +99,10 @@ final class KkbEpay_Key
   public function setCertificateId($id)
   {
     if (!is_string($id)) {
-      throw new KkbEpay_KeyError('Certificate ID must be a string.');
+      throw new KkbEpay_KeyException('Certificate ID must be a string.');
     }
     if (!preg_match('/^[A-Fa-F0-9]{10}$/', $id)) {
-      throw new KkbEpay_KeyError('Certificate ID does not much expected format.');
+      throw new KkbEpay_KeyException('Certificate ID does not much expected format.');
     }
     $this->_certificate_id = strtoupper($id);
     return $this;
