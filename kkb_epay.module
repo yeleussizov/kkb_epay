@@ -38,7 +38,7 @@ function kkb_epay_menu() {
       'description'      => t('KKB Epay payments gateway configuration.'),
       'page callback'    => 'system_admin_menu_block_page',
       'access callback'  => 'user_access',
-      'access arguments' => array('administer epay'),
+      'access arguments' => array('administer kkb_epay'),
       'file'             => 'system.admin.inc',
       'file path'        => drupal_get_path('module', 'system'),
       'type'             => MENU_NORMAL_ITEM,
@@ -49,7 +49,7 @@ function kkb_epay_menu() {
       'page callback'    => 'drupal_get_form',
       'page arguments'   => array('kkb_epay_admin_debug_form'),
       'access callback'  => 'user_access',
-      'access arguments' => array('administer epay'),
+      'access arguments' => array('administer kkb_epay'),
       'file'             => 'kkb_epay.admin.inc',
       'type'             => MENU_NORMAL_ITEM,
     ),
@@ -59,7 +59,7 @@ function kkb_epay_menu() {
       'page callback'    => 'drupal_get_form',
       'page arguments'   => array('kkb_epay_admin_private_key_form'),
       'access callback'  => 'user_access',
-      'access arguments' => array('administer epay'),
+      'access arguments' => array('administer kkb_epay'),
       'file'             => 'kkb_epay.admin.inc',
       'type'             => MENU_NORMAL_ITEM,
     ),
@@ -75,6 +75,19 @@ function kkb_epay_theme($existing, $type, $theme, $path) {
   $hooks = array();
 
   return $hooks;
+}
+
+/**
+ * Implements hook_permission().
+ */
+function kkb_epay_permission() {
+  return array(
+    'administer kkb_epay' => array(
+      'title' => t('Administer KKB Epay configuration'),
+      'description' => t('Manage private keys and payments debugging mode.'),
+      'restrict access' => TRUE,
+    ),
+  );
 }
 
 /**
