@@ -37,6 +37,33 @@ function kkb_epay_admin_debug_form($form, &$form_state) {
 }
 
 /**
+ * Form handler validates kkb_epay_admin_debug_form.
+ */
+function kkb_epay_admin_debug_form_validate($form, &$form_state) {
+  global $user;
+  require_once DRUPAL_ROOT . '/' . variable_get('password_inc', 'includes/password.inc');
+
+  if (!user_check_password($form_state['values']['password_confirmation'], $user)) {
+    form_set_error('password_confirmation', t('Your password is incorrect.'));
+  }
+}
+
+/**
+ * Form handler submits kkb_epay_admin_debug_form.
+ */
+function kkb_epay_admin_debug_form_submit($form, &$form_state) {
+  $new_status = (bool) $form_state['values']['kkb_epay_debug_status'];
+  variable_set('kkb_epay_debug_status', $new_status);
+
+  if ($new_status) {
+    drupal_set_message(t('Debugging mode has been turned on. Turn it off as soon as possible.'), 'warning');
+  }
+  else {
+    drupal_set_message(t('Debugging mode has been turned off.'));
+  }
+}
+
+/**
  * Form builder. Private key configuration form.
  */
 function kkb_epay_admin_private_key_form($form, &$form_state) {
