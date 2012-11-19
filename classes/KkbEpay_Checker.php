@@ -43,6 +43,10 @@ final class KkbEpay_Checker
       throw new KkbEpay_Exception('Message cannot be empty.');
     }
 
+    // Reasons why _reverse operation is used are the same as in the
+    // KkbEpay_Sign::sign method.
+    $signature = $this->_reverse($signature);
+
     return openssl_verify($message, $signature, $this->_certificate);
   }
 
@@ -52,6 +56,12 @@ final class KkbEpay_Checker
   public function check64($message, $signature)
   {
     return $this->check($message, base64_decode($signature));
+  }
+
+
+  private function _reverse($data)
+  {
+    return strrev($data);
   }
 
 }
