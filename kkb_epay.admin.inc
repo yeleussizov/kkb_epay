@@ -67,9 +67,59 @@ function kkb_epay_admin_debug_form_submit($form, &$form_state) {
  * Form builder. Private key configuration form.
  */
 function kkb_epay_admin_private_key_form($form, &$form_state) {
-  //
-  // STUB TODO
-  //
+  $form['key_data'] = array();
+
+  $form['key_data']['certificate_id'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Certificate ID:'),
+    '#size' => 20,
+    '#maxlegnth' => 10,
+    '#required' => TRUE,
+  );
+
+  $form['key_data']['merchant_name'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Merchant name:'),
+    '#size' => 60,
+    '#maxlegnth' => 255,
+    '#required' => TRUE,
+  );
+
+  $form['key_data']['merchant_id'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Merchant ID:'),
+    '#size' => 20,
+    '#maxlegnth' => 8,
+    '#required' => TRUE,
+  );
+
+  $form['key_data']['password'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Private key password:'),
+    '#size' => 60,
+    '#maxlegnth' => 255,
+    '#required' => TRUE,
+  );
+
+  $form['key_data']['key'] = array(
+    '#type' => 'textarea',
+    '#title' => t('Private key:'),
+    '#cols' => 80,
+    '#rows' => 20,
+    '#required' => TRUE,
+  );
+
+  $form['actions'] = array(
+    '#type' => 'actions',
+    'submit' => array(
+      '#type' => 'submit',
+      '#value' => t('Import new private key'),
+    ),
+  );
+
+  $form['#validate'] = array('kkb_epay_admin_private_key_form_validate');
+  $form['#submit'] = array('kkb_epay_admin_private_key_form_submit');
+
   return $form;
 }
 
