@@ -155,3 +155,20 @@ function kkb_epay_admin_private_key_form_validate($form, &$form_state) {
   }
 }
 
+/**
+ * Form handler submits kkb_epay_admin_private_key_form.
+ */
+function kkb_epay_admin_private_key_form_submit($form, &$form_state) {
+  $encoded = _kkb_epay_admin_private_key_encode($form_state['key_data']);
+
+  // TODO: store encoded key.
+}
+
+/**
+ * Encodes information about a private key in the format used by the
+ * KkbEpay_DrupalKeyLoader.
+ */
+function _kkb_epay_admin_private_key_encode($data) {
+  return str_split(base64_encode(serialize($data)), 64);
+}
+
