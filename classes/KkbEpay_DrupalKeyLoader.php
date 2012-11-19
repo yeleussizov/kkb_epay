@@ -29,7 +29,12 @@ class KkbEpay_DrupalKeyLoader implements KkbEpay_KeyLoaderInterface
 
   public function verifyKey()
   {
-    return $this->getKey()->isValid();
+    try {
+      return $this->getKey()->isValid();
+    }
+    catch (KkbEpay_Exception $ex) {
+      return FALSE;
+    }
   }
 
 
