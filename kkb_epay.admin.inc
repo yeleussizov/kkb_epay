@@ -67,7 +67,9 @@ function kkb_epay_admin_debug_form_submit($form, &$form_state) {
  * Form builder. Private key configuration form.
  */
 function kkb_epay_admin_private_key_form($form, &$form_state) {
-  $form['key_data'] = array();
+  $form['key_data'] = array(
+    '#tree' => TRUE,
+  );
 
   $form['key_data']['certificate_id'] = array(
     '#type' => 'textfield',
