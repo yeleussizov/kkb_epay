@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Signatures checker.
+ * Signature checker.
  */
 final class KkbEpay_Checker
 {
