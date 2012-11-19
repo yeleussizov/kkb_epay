@@ -96,3 +96,14 @@ function kkb_epay_check_signature($message, $signature) {
   return FALSE;
 }
 
+/**
+ * Returnes the current debugging status.
+ *
+ * @return boolean
+ *   TRUE if debugging mode is turned on.
+ *   FALSE if debugging mode is turned off.
+ */
+function kkb_epay_debug_status() {
+  return (bool) variable_get('kkb_epay_debug_status', FALSE);
+}
+
