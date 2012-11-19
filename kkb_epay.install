@@ -6,4 +6,37 @@
  *   kkb_epay module.
  */
 
+/**
+ * Implements hook_requirements().
+ */
+function kkb_epay_requirements($phase) {
+  $requirements = array();
+  $t = get_t();
+
+  if (!function_exists('openssl_get_privatekey')) {
+    $requirements['openssl'] = array(
+      'title' => $('OpenSSL extension'),
+      'description' => $t('The OpenSSL extension is required to secure transactions, but it was not found.'),
+      'severity' => REQUIREMENT_ERROR,
+    );
+  }
+
+  if ($phase == 'runtime') {
+    $key_loader = new KkbEpay_DrupalKeyLoader();
+    $key_loader->setDebug(FALSE);
+
+    if (!$key_loader->verifyKey()) {
+      $requirements['kkb_epay_private_key'] = array(
+        'title' => $t('KKB Epay private key'),
+        'description' => $t(
+          'Private key is not found. You will not be able to receive payments without a private key. You can <a href="@url">configure it right now</a>.',
+          array('@url' => url('admin/config/services/epay/private-key'))
+        ),
+        'severity' => REQUIREMENT_WARNING,
+      );
+    }
+  }
+
+  return $requirements;
+}
 
