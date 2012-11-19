@@ -34,7 +34,7 @@ interface KkbEpay_KeyLoaderInterface
    *
    * @return boolean
    *   TRUE if private key is fine;
-   *   FLASE if case of any problems with the key.
+   *   FLASE if there are any problems with the key.
    */
   public function verifyKey();
 
