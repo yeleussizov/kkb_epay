@@ -46,5 +46,13 @@ final class KkbEpay_Checker
     return openssl_verify($message, $signature, $this->_certificate);
   }
 
+  /**
+   * Decodes signature with base64 and checks with the check() method.
+   */
+  public function check64($message, $signature)
+  {
+    return $this->check($message, base64_decode($signature));
+  }
+
 }
 
