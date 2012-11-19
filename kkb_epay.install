@@ -15,7 +15,7 @@ function kkb_epay_requirements($phase) {
 
   if (!function_exists('openssl_get_privatekey')) {
     $requirements['openssl'] = array(
-      'title' => $('OpenSSL extension'),
+      'title' => $t('OpenSSL extension'),
       'description' => $t('The OpenSSL extension is required to secure transactions, but it was not found.'),
       'severity' => REQUIREMENT_ERROR,
     );
