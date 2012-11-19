@@ -1,0 +1,9 @@
+<?php
+
+/**
+ * @file kkb_epay.install
+ *   Install, update, uninstall and other related functions of the
+ *   kkb_epay module.
+ */
+
+
