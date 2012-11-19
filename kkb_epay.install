@@ -32,7 +32,7 @@ function kkb_epay_requirements($phase) {
           'Private key is not found. You will not be able to receive payments without a private key. You can <a href="@url">configure it right now</a>.',
           array('@url' => url('admin/config/services/epay/private-key'))
         ),
-        'severity' => REQUIREMENT_WARNING,
+        'severity' => REQUIREMENT_ERROR,
       );
     }
   }
