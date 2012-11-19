@@ -29,6 +29,15 @@ function kkb_epay_create_billing_statement() {
 }
 
 /**
+ * Implements hook_init().
+ */
+function kkb_epay_init() {
+  if (kkb_epay_debug_status()) {
+    drupal_set_message(t('KKB Epay debugging mode is turned on. All payments will be successful, but clients will not be billed.'), 'warning');
+  }
+}
+
+/**
  * Implements hook_menu().
  */
 function kkb_epay_menu() {
