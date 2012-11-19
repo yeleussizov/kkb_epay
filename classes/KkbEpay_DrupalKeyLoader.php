@@ -27,7 +27,7 @@ class KkbEpay_DrupalKeyLoader implements KkbEpay_KeyLoaderInterface
     $this->_debug = (bool) $flag;
   }
 
-  public function verifyKey()
+  public function validateKey()
   {
     try {
       return $this->getKey()->isValid();

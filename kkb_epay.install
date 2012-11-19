@@ -25,7 +25,7 @@ function kkb_epay_requirements($phase) {
     $key_loader = new KkbEpay_DrupalKeyLoader();
     $key_loader->setDebug(FALSE);
 
-    if (!$key_loader->verifyKey()) {
+    if (!$key_loader->validateKey()) {
       $requirements['kkb_epay_private_key'] = array(
         'title' => $t('KKB Epay private key'),
         'description' => $t(

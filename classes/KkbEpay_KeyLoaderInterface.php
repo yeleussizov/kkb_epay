@@ -36,7 +36,7 @@ interface KkbEpay_KeyLoaderInterface
    *   TRUE if private key is fine;
    *   FALSE if there are any problems with the key.
    */
-  public function verifyKey();
+  public function validateKey();
 
 }
 

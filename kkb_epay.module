@@ -101,7 +101,7 @@ function kkb_epay_sign_message($message) {
   $loader = new KkbEpay_DrupalKeyLoader();
   $loader->setDebug(kkb_epay_debug_status());
 
-  if (!$loader->verifyKey()) {
+  if (!$loader->validateKey()) {
     drupal_set_message(t('Private key could not be loaded. Message will not be signed.'), 'error');
     return NULL;
   }
