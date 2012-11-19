@@ -125,3 +125,33 @@ function kkb_epay_admin_private_key_form($form, &$form_state) {
   return $form;
 }
 
+/**
+ * Form handler validates kkb_epay_admin_private_key_form.
+ *
+ * The KkbEpay_Key model is capable of self-validation and since its
+ * constraints can be quite complicated, it would be inefficient to repeat all
+ * of them here. That is why we will create an instance of KkbEpay_Key class,
+ * set it with inputed values and catch any validation error.
+ */
+function kkb_epay_admin_private_key_form_validate($form, &$form_state) {
+  $key = new KkbEpay_Key();
+
+  $fields = array(
+    'key', 'password', 'merchant_id', 'merchant_name', 'certificate_id',
+  );
+  foreach ($fields as $f) {
+    $method = 'set' . str_replace('_', '', $f);
+
+    try {
+      $key->$method($form_state['values']['key_data'][$f]);
+    }
+    catch (KkbEpay_KeyException $ex) {
+      form_set_error("key_data][$f", t($ex->getMessage()));
+    }
+  }
+
+  if (!$key->isValid()) {
+    form_set_error('key_data', t('There is something wrong with this key. Please, check that the provided information is correct.'));
+  }
+}
+
