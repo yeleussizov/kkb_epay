@@ -137,7 +137,6 @@ function kkb_epay_check_signature($message, $signature) {
   catch (KkbEpay_Exception $ex) {
     return FALSE;
   }
-  return FALSE;
 }
 
 /**
