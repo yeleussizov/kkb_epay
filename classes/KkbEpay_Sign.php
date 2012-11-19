@@ -24,7 +24,7 @@ final class KkbEpay_Sign
   }
 
   /**
-   * Signes given message with loaded private key.
+   * Signs given message with loaded private key.
    *
    * @param string @message
    *   Message that must be signed as a string. Cannot be empty.
@@ -50,7 +50,7 @@ final class KkbEpay_Sign
   }
 
   /**
-   * Signes the message with sign() method. and encodes signature with
+   * Signs the message with sign() method. and encodes signature with
    * bas64 function.
    */
   public function sign64($message)

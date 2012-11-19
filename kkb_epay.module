@@ -91,7 +91,7 @@ function kkb_epay_permission() {
 }
 
 /**
- * Signes a message with the default key.
+ * Signs a message with the default key.
  *
  * @return string|NULL
  *   Returnes NULL if any errors happen. Otherwise, returns base64-encoded
