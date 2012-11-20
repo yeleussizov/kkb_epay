@@ -77,3 +77,28 @@ function kkb_epay_check_signature($message, $signature) {
   }
 }
 
+/**
+ * Creates a complete signed order document that can be sent directly to the
+ * processing center.
+ *
+ * @return string
+ *   Order document as a string. The document is not base64 encoded.
+ */
+function kkb_epay_create_signed_order(KkbEpay_Order $order) {
+  $key = kkb_epay_load_default_key();
+
+  $merchant_data = theme('kkb_epay_merchant_data', array(
+    'amount'         => $order->getAmount(),
+    'certificate_id' => $key->getCertificateId(),
+    'currency'       => KKB_EPAY_CURRENCY_CODE_TENGE,
+    'merchant_id'    => $key->getMerchantId(),
+    'merchant_name'  => $key->getMerchantName(),
+    'order_id'       => $order->getId(),
+  ));
+
+  return theme('kkb_epay_signed_order', array(
+    'merchant'  => $merchant,
+    'signature' => kkb_epay_sign_message($merchant_data),
+  ));
+}
+
