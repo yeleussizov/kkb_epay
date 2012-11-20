@@ -173,7 +173,7 @@ function kkb_epay_admin_private_key_form_submit($form, &$form_state) {
  * Packed information about a private key in the format used by the
  * KkbEpay_DrupalKeyLoader.
  */
-function _kkb_epay_admin_private_key_packed($data) {
+function _kkb_epay_admin_private_key_pack($data) {
   return str_split(base64_encode(serialize($data)), 64);
 }
 
