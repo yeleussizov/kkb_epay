@@ -215,7 +215,7 @@ function kkb_epay_admin_private_key_save_page() {
     ),
     '#description' => t(
       'Copy the entire code. Do not modify it! Place it at the end of the <strong>@file</strong> file and save it.',
-      array('@file' => conf_path())
+      array('@file' => conf_path() . '/settings.php')
     ),
   );
 
