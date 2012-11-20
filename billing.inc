@@ -6,6 +6,19 @@
  */
 
 /**
+ * Loads current private key with the defualt Kkb_DrupalKeyLoader.
+ */
+function kkb_epay_load_default_key() {
+  static $key = NULL;
+  if (!isset($key)) {
+    $loader = new Kkb_DrupalKeyLoader();
+    $loader->setDebug(kkb_epay_debug_status());
+    $key = $loader->getKey();
+  }
+  return $key;
+}
+
+/**
  * Signs a message with the default key.
  *
  * @return string|NULL
