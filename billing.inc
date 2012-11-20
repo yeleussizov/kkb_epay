@@ -6,7 +6,7 @@
  */
 
 /**
- * Loads current private key with the defualt Kkb_DrupalKeyLoader.
+ * Loads current private key with the default Kkb_DrupalKeyLoader.
  */
 function kkb_epay_load_default_key() {
   static $key = NULL;
