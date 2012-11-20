@@ -148,6 +148,40 @@ function kkb_epay_menu() {
     'type'             => MENU_CALLBACK,
   );
 
+  $items['epay/back/success/%'] = array(
+    'title'            => 'Payment was successful',
+    'page callback'    => 'kkb_epay_callback_back_success',
+    'page arguments'   => array(3),
+    'access callback'  => TRUE,
+    'file'             => 'callbacks.inc',
+    'type'             => MENU_CALLBACK,
+  );
+
+  $items['epay/back/failure/%'] = array(
+    'title'            => 'Payment failed',
+    'page callback'    => 'kkb_epay_callback_back_failure',
+    'page arguments'   => array(3),
+    'access callback'  => TRUE,
+    'file'             => 'callbacks.inc',
+    'type'             => MENU_CALLBACK,
+  );
+
+  $items['epay/post/success/%'] = array(
+    'page callback'    => 'kkb_epay_callback_post_success',
+    'page arguments'   => array(3),
+    'access callback'  => TRUE,
+    'file'             => 'callbacks.inc',
+    'type'             => MENU_CALLBACK,
+  );
+
+  $items['epay/post/failure/%'] = array(
+    'page callback'    => 'kkb_epay_callback_post_failure',
+    'page arguments'   => array(3),
+    'access callback'  => TRUE,
+    'file'             => 'callbacks.inc',
+    'type'             => MENU_CALLBACK,
+  );
+
   return $items;
 }
 
