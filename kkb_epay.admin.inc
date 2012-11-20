@@ -174,7 +174,7 @@ function kkb_epay_admin_private_key_form_submit($form, &$form_state) {
  * KkbEpay_DrupalKeyLoader.
  */
 function _kkb_epay_admin_private_key_pack($data) {
-  return str_split(base64_encode(serialize($data)), 64);
+  return implode("\n", str_split(base64_encode(serialize($data)), 64));
 }
 
 /**
