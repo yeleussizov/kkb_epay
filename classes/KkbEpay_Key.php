@@ -79,7 +79,7 @@ final class KkbEpay_Key
       throw new KkbEpay_KeyException('Merchant ID must be a string.');
     }
     if (!preg_match('/^[0-9]{8}$/', $id)) {
-      throw new KkbEpay_KeyException('Merchant ID does not much expected format. It must consist of 8 digits.');
+      throw new KkbEpay_KeyException('Merchant ID does not match expected format. It must consist of 8 digits.');
     }
     $this->_merchant_id = $id;
     return $this;
@@ -94,7 +94,7 @@ final class KkbEpay_Key
       throw new KkbEpay_KeyException('Merchant name is too long. It cannot be longer than 255 characters.');
     }
     if (!preg_match('/^[A-Za-z0-9 _-]{1,255}$/', $name)) {
-      throw new KkbEpay_KeyException('Merchant name does not much expected format. It can consist only of English letters, digits, \'-\', \'_\' and space.');
+      throw new KkbEpay_KeyException('Merchant name does not match expected format. It can consist only of English letters, digits, \'-\', \'_\' and space.');
     }
     $this->_merchant_name = $name;
     return $this;
@@ -106,7 +106,7 @@ final class KkbEpay_Key
       throw new KkbEpay_KeyException('Certificate ID must be a string.');
     }
     if (!preg_match('/^[A-Fa-f0-9]{10}$/', $id)) {
-      throw new KkbEpay_KeyException('Certificate ID does not much expected format. It must be exactly 10 characters long and consist of hexadecimal digits.');
+      throw new KkbEpay_KeyException('Certificate ID does not match expected format. It must be exactly 10 characters long and consist of hexadecimal digits.');
     }
     $this->_certificate_id = strtoupper($id);
     return $this;
