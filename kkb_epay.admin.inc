@@ -177,3 +177,48 @@ function _kkb_epay_admin_private_key_packed($data) {
   return str_split(base64_encode(serialize($data)), 64);
 }
 
+/**
+ * Menu page callback. Displayes previously imported private key in a packaged
+ * format and gives futher instructions to the user.
+ */
+function kkb_epay_admin_private_key_save_page() {
+  if (empty($_SESSION['kkb_epay']['packed_private_key'])) {
+    drupal_goto('admin/config/services/epay/private-key');
+  }
+
+  $conf = "\$conf['kkb_epay_private_key_live'] = <<<ENDPRIVATEKEY\n";
+  $conf .= $_SESSION['kkb_epay']['packed_private_key'];
+  $conf .= "\nENDPRIVATEKEY;\n\n";
+
+  $page = array();
+  $page['help'] = array(
+    array(
+      '#prefix' => '<p>',
+      '#markup' => t('Your private key has been imported, but it was not yet saved. These instructions will tell you how to do it.'),
+      '#suffix' => '</p>',
+    ),
+    array(
+      '#prefix' => '<p>',
+      '#markup' => t('The private key must be kept in secret, because anyone who has it can perform financial operations on your behalf, such as debit any credit cards, cancel payments, transfer money from your account, etc.'),
+      '#suffix' => '</p>',
+    ),
+  );
+
+  $page['configuration'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Place this code into your settings.php file:'),
+    '#default_value' => $conf,
+    '#rows' => 20,
+    '#cols' => 80,
+    '#attributes' => array(
+      'readonly' => 'readonly',
+    ),
+    '#description' => t(
+      'Copy the entire code. Do not modify it! Place it at the end of the <strong>@file</strong> file and save it.',
+      array('@file' => conf_path())
+    ),
+  );
+
+  return $page;
+}
+
