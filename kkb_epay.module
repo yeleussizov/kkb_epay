@@ -19,11 +19,62 @@
  *   to the site and handled by drupal_build_form() function. This form must
  *   be submitted directly to the authorization server.
  *
+ * @param KkbEpay_Order $order
+ *   Information about order that must be payed.
+ *
+ * @param object $account
+ *   Account of a user who recieves the billing statement. Account is used to
+ *   get user email and prefered language.
+ *
+ * @todo
+ *   Set interface language to user's prefered language.
+ *
  * @return
  *   Complete definition of a billing form in a form of a renderable array.
  */
-function kkb_epay_create_billing_statement() {
+function kkb_epay_create_billing_statement(KkbEpay_Order $order, $account) {
+  module_load_include('inc', 'kkb_epay', 'billing');
+
   $form = array();
+  $form['#type'] = 'form';
+  $form['#action'] = kkb_epay_payment_form_submit_url();
+
+  $form['Signed_Order_64'] = array(
+    '#type' => 'hidden',
+    '#value' => base64_encode(kkb_epay_create_signed_order($order)),
+  );
+  $form['email'] = array(
+    '#type' => 'hidden',
+    '#value' => $account->mail,
+  );
+  $form['BackLink'] = array(
+    '#type' => 'hidden',
+    '#value' => url('epay/back/success/' . $order->getId(), array('absolute' => TRUE)),
+  );
+  $form['FailureBackLink'] = array(
+    '#type' => 'hidden',
+    '#value' => url('epay/back/failure/' . $order->getId(), array('absolute' => TRUE)),
+  );
+  $form['PostLink'] = array(
+    '#type' => 'hidden',
+    '#value' => url('epay/post/success/' . $order->getId(), array('absolute' => TRUE)),
+  );
+  $form['FailurePostLink'] = array(
+    '#type' => 'hidden',
+    '#value' => url('epay/post/failure/' . $order->getId(), array('absolute' => TRUE)),
+  );
+  $form['appendix'] = array(
+    '#type' => 'hidden',
+    '#value' => '', // FIXME
+  ),
+
+  $form['actions'] = array(
+    '#type' => 'actions',
+    'submit' => array(
+      '#type' => 'submit',
+      '#value' => t('Proceed to payment'),
+    ),
+  );
 
   return $form;
 }
