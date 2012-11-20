@@ -104,6 +104,14 @@ function kkb_epay_theme($existing, $type, $theme, $path) {
     ),
   );
 
+  $hooks['kkb_epay_signed_order'] = array(
+    'template' => 'templates/signed-order.tpl.php',
+    'variables' => array(
+      'merchant' => '',
+      'signature' => '',
+    ),
+  ),
+
   return $hooks;
 }
 
