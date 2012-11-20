@@ -157,11 +157,16 @@ function kkb_epay_admin_private_key_form_validate($form, &$form_state) {
 
 /**
  * Form handler submits kkb_epay_admin_private_key_form.
+ *
+ * @todo
+ *   It would be much better to write encoded private key directly to the
+ *   settings.php file and not ask user to do it manually.
  */
 function kkb_epay_admin_private_key_form_submit($form, &$form_state) {
   $encoded = _kkb_epay_admin_private_key_encode($form_state['key_data']);
 
-  // TODO: store encoded key.
+  $_SESSION['kkb_epay']['encoded_private_key'] = $encoded;
+  $form_state['redirect'] = 'admin/config/services/epay/save-private-key';
 }
 
 /**
