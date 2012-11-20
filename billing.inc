@@ -103,3 +103,19 @@ function kkb_epay_create_signed_order(KkbEpay_Order $order) {
   ));
 }
 
+/**
+ * Returns URL of the gateway that will be used to process payment.
+ *
+ * Returned value is different when debug mode on and off.
+ */
+function kkb_epay_processing_gateway_url() {
+  if (kkb_epay_debug_status()) {
+    // URL of the sandbox gateway.
+    return 'http://3dsecure.kkb.kz/jsp/process/logon.jsp';
+  }
+  else {
+    // URL of the live processing gateway.
+    return 'https://epay.kkb.kz/jsp/process/logon.jsp';
+  }
+}
+
