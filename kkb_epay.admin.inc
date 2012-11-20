@@ -202,6 +202,14 @@ function kkb_epay_admin_private_key_save_page() {
       '#markup' => t('The private key must be kept <strong>in secret</strong> because anyone who has it can perform financial operations on your behalf, for example, debit any credit cards, cancel payments, transfer money from your account, etc.'),
       '#suffix' => '</p>',
     ),
+    array(
+      '#prefix' => '<p>',
+      '#markup' => t(
+        'Copy the code below. Do not modify it! Place it at the end of the <strong>@file</strong> file and save the file.',
+        array('@file' => conf_path() . '/settings.php')
+      ),
+      '#suffix' => '</p>',
+    ),
   );
 
   $page['configuration'] = array(
@@ -212,10 +220,6 @@ function kkb_epay_admin_private_key_save_page() {
     '#cols' => 80,
     '#attributes' => array(
       'readonly' => 'readonly',
-    ),
-    '#description' => t(
-      'Copy the entire code. Do not modify it! Place it at the end of the <strong>@file</strong> file and save it.',
-      array('@file' => conf_path() . '/settings.php')
     ),
   );
 
