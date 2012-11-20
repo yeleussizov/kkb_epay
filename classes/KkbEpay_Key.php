@@ -90,7 +90,7 @@ final class KkbEpay_Key
     if (!is_string($name)) {
       throw new KkbEpay_KeyException('Merchant name must be a string.');
     }
-    if (!preg_match('/^[A-Za-z0-9 _-]{255}$/', $name)) {
+    if (!preg_match('/^[A-Za-z0-9 _-]{1,255}$/', $name)) {
       throw new KkbEpay_KeyException('Merchant name does not much expected format.');
     }
     $this->_merchant_name = $name;
