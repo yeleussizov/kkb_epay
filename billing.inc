@@ -89,11 +89,12 @@ function kkb_epay_create_signed_order(KkbEpay_Order $order) {
 
   $merchant_data = theme('kkb_epay_merchant_data', array(
     'amount'         => $order->getAmount(),
-    'certificate_id' => $key->getCertificateId(),
     'currency'       => $order->getCurrency(),
+    'order_id'       => $order->getId(),
+
+    'certificate_id' => $key->getCertificateId(),
     'merchant_id'    => $key->getMerchantId(),
     'merchant_name'  => $key->getMerchantName(),
-    'order_id'       => $order->getId(),
   ));
 
   return theme('kkb_epay_signed_order', array(
