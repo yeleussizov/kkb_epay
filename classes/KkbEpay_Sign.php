@@ -17,7 +17,9 @@ final class KkbEpay_Sign
 
     $resource = openssl_get_privatekey($key->getKey(), $key->getPassword());
     if (empty($resource)) {
-      throw new KkbEpay_Exception('Provided key could not be opened by openssl_get_privatekey().');
+      $error = 'Provided key could not be opened by openssl_get_privatekey().';
+      $previous = new KkbEpay_OpenSSLException(strval(openssl_error_string()));
+      throw new KkbEpay_Exception($error, 0, $previous);
     }
 
     $this->_key = $resource;

@@ -17,7 +17,9 @@ final class KkbEpay_Checker
 
     $resource = openssl_get_publickey($certificate->getCertificate());
     if (empty($resource)) {
-      throw new KkbEpay_Exception('Provided certificate could not be loaded by openssl_get_publickey().');
+      $error = 'Provided certificate could not be loaded by openssl_get_publickey().';
+      $previous = new KkbEpay_OpenSSLException(strval(openssl_error_string()));
+      throw new KkbEpay_Exception($error, 0, $previous);
     }
 
     $this->_certificate = $resource;
