@@ -8,7 +8,7 @@
 class KkbEpay_Order
 {
 
-  protected $_order_id;
+  protected $_id;
 
   protected $_amount;
 
@@ -18,7 +18,7 @@ class KkbEpay_Order
   public function __construct($order_id = NULL)
   {
     if (!empty($order_id)) {
-      $this->setOrderId($order_id);
+      $this->setId($order_id);
     }
   }
 
@@ -31,7 +31,7 @@ class KkbEpay_Order
    * This ID must uniquely identify order on the site, as it will be sent
    * back by the processing center with the results of the operation.
    */
-  public function setOrderId($id)
+  public function setId($id)
   {
     $id = (string) $id;
     if (!preg_match('/^[0-9]+$/', $id)) {
@@ -62,7 +62,7 @@ class KkbEpay_Order
     return $this->setAmount($amount, 398);
   }
 
-  public function getOrderId()
+  public function getId()
   {
     return $this->_order_id;
   }
