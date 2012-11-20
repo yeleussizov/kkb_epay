@@ -18,6 +18,7 @@ function kkb_epay_requirements($phase) {
       'title' => $t('OpenSSL extension'),
       'description' => $t('The OpenSSL extension is required to secure transactions, but it was not found.'),
       'severity' => REQUIREMENT_ERROR,
+      'value' => NULL,
     );
   }
 
@@ -33,6 +34,7 @@ function kkb_epay_requirements($phase) {
           array('@url' => url('admin/config/services/epay/private-key'))
         ),
         'severity' => REQUIREMENT_ERROR,
+        'value' => NULL,
       );
     }
     else {
@@ -43,6 +45,7 @@ function kkb_epay_requirements($phase) {
           array('%id' => $key_loader->getKey()->getMerchantId())
         ),
         'severity' => REQUIREMENT_OK,
+        'value' => NULL,
       );
     }
   }
