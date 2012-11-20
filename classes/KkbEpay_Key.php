@@ -116,7 +116,7 @@ final class KkbEpay_Key
 
   public function getPassword()
   {
-    return $this->_password;
+    return empty($this->_password) ? '' : $this->_password;
   }
 
   public function getMerchantId()
