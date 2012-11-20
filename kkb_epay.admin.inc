@@ -199,7 +199,7 @@ function kkb_epay_admin_private_key_save_page() {
     ),
     array(
       '#prefix' => '<p>',
-      '#markup' => t('The private key must be kept in secret, because anyone who has it can perform financial operations on your behalf, such as debit any credit cards, cancel payments, transfer money from your account, etc.'),
+      '#markup' => t('The private key must be kept in secret because anyone who has it can perform financial operations on your behalf, for example, debit any credit cards, cancel payments, transfer money from your account, etc.'),
       '#suffix' => '</p>',
     ),
   );
