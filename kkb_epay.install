@@ -26,18 +26,7 @@ function kkb_epay_requirements($phase) {
     $key_loader = new KkbEpay_DrupalKeyLoader();
     $key_loader->setDebug(FALSE);
 
-    if (!$key_loader->validateKey()) {
-      $requirements['kkb_epay_private_key'] = array(
-        'title' => $t('KKB Epay private key'),
-        'description' => $t(
-          'Private key is not found. You will not be able to receive payments without a private key. You can <a href="@url">configure it right now</a>.',
-          array('@url' => url('admin/config/services/epay/private-key'))
-        ),
-        'severity' => REQUIREMENT_ERROR,
-        'value' => NULL,
-      );
-    }
-    else {
+    if ($key_loader->validateKey()) {
       $requirements['kkb_epay_private_key'] = array(
         'title' => $t('KKB Epay private key'),
         'description' => $t(
@@ -45,6 +34,17 @@ function kkb_epay_requirements($phase) {
           array('%id' => $key_loader->getKey()->getMerchantId())
         ),
         'severity' => REQUIREMENT_OK,
+        'value' => NULL,
+      );
+    }
+    else {
+      $requirements['kkb_epay_private_key'] = array(
+        'title' => $t('KKB Epay private key'),
+        'description' => $t(
+          'Private key is not found. You will not be able to receive payments without a private key. You can <a href="@url">configure it right now</a>.',
+          array('@url' => url('admin/config/services/epay/private-key'))
+        ),
+        'severity' => REQUIREMENT_ERROR,
         'value' => NULL,
       );
     }
