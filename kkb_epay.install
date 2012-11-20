@@ -35,6 +35,16 @@ function kkb_epay_requirements($phase) {
         'severity' => REQUIREMENT_ERROR,
       );
     }
+    else {
+      $requirements['kkb_epay_private_key'] = array(
+        'title' => $t('KKB Epay private key'),
+        'description' => $t(
+          'Private key loaded. Merchant ID is %id.',
+          array('%id' => $key_loader->getKey()->getMerchantId())
+        ),
+        'severity' => REQUIREMENT_OK,
+      );
+    }
   }
 
   return $requirements;
