@@ -92,6 +92,18 @@ function kkb_epay_menu() {
 function kkb_epay_theme($existing, $type, $theme, $path) {
   $hooks = array();
 
+  $hooks['kkb_epay_merchant_data'] = array(
+    'template' => 'templates/merchant-data.tpl.php',
+    'variables' => array(
+      'amount' => '',
+      'certificate_id' => '',
+      'currency' => '',
+      'merchant_id' => '',
+      'merchant_name' => '',
+      'order_id' => '',
+    ),
+  );
+
   return $hooks;
 }
 
