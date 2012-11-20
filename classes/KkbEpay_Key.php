@@ -56,10 +56,10 @@ final class KkbEpay_Key
       throw new KkbEpay_KeyException('Key must be a string.');
     }
     if (substr($key, 0, 31) != '-----BEGIN RSA PRIVATE KEY-----') {
-      throw new KkbEpay_KeyException('Key does not start a correct RSA key declaration.');
+      throw new KkbEpay_KeyException('Key does not start with a correct RSA key declaration.');
     }
     if (substr($key, -29) != '-----END RSA PRIVATE KEY-----') {
-      throw new KkbEpay_KeyException('Key does not end a correct RSA key declaration.');
+      throw new KkbEpay_KeyException('Key does not end with a correct RSA key declaration.');
     }
     $this->_key = trim($key);
     return $this;
