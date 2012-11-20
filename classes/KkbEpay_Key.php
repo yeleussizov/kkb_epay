@@ -1,8 +1,7 @@
 <?php
 
 /**
- * Representation of a RSA private key that can be used to sign and validate
- * text messages.
+ * Representation of a RSA private key that can be used to sign text messages.
  */
 final class KkbEpay_Key
 {
