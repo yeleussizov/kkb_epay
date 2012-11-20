@@ -103,46 +103,49 @@ function kkb_epay_init() {
  * Implements hook_menu().
  */
 function kkb_epay_menu() {
-  $items = array(
-    'admin/config/services/epay' => array(
-      'title'            => 'KKB Epay',
-      'description'      => t('KKB Epay payments gateway configuration.'),
-      'page callback'    => 'system_admin_menu_block_page',
-      'access callback'  => 'user_access',
-      'access arguments' => array('administer kkb_epay'),
-      'file'             => 'system.admin.inc',
-      'file path'        => drupal_get_path('module', 'system'),
-      'type'             => MENU_NORMAL_ITEM,
-    ),
-    'admin/config/services/epay/debug' => array(
-      'title'            => 'KKB Epay debugging mode',
-      'description'      => t('Choose to send payments to a live gateway or a sandbox.'),
-      'page callback'    => 'drupal_get_form',
-      'page arguments'   => array('kkb_epay_admin_debug_form'),
-      'access callback'  => 'user_access',
-      'access arguments' => array('administer kkb_epay'),
-      'file'             => 'kkb_epay.admin.inc',
-      'type'             => MENU_NORMAL_ITEM,
-    ),
-    'admin/config/services/epay/private-key' => array(
-      'title'            => 'KKB Epay private key configuration',
-      'description'      => t('Check the existing or add a new private key.'),
-      'page callback'    => 'drupal_get_form',
-      'page arguments'   => array('kkb_epay_admin_private_key_form'),
-      'access callback'  => 'user_access',
-      'access arguments' => array('administer kkb_epay'),
-      'file'             => 'kkb_epay.admin.inc',
-      'type'             => MENU_NORMAL_ITEM,
-    ),
-    'admin/config/services/epay/save-private-key' => array(
-      'title'            => 'KKB Epay private key configuration',
-      'description'      => t('Save imported private key into configuration file.'),
-      'page callback'    => 'kkb_epay_admin_private_key_save_page',
-      'access callback'  => 'user_access',
-      'access arguments' => array('administer kkb_epay'),
-      'file'             => 'kkb_epay.admin.inc',
-      'type'             => MENU_CALLBACK,
-    ),
+  $items = array();
+
+  $items['admin/config/services/epay'] = array(
+    'title'            => 'KKB Epay',
+    'description'      => t('KKB Epay payments gateway configuration.'),
+    'page callback'    => 'system_admin_menu_block_page',
+    'access callback'  => 'user_access',
+    'access arguments' => array('administer kkb_epay'),
+    'file'             => 'system.admin.inc',
+    'file path'        => drupal_get_path('module', 'system'),
+    'type'             => MENU_NORMAL_ITEM,
+  );
+
+  $items['admin/config/services/epay/debug'] => array(
+    'title'            => 'KKB Epay debugging mode',
+    'description'      => t('Choose to send payments to a live gateway or a sandbox.'),
+    'page callback'    => 'drupal_get_form',
+    'page arguments'   => array('kkb_epay_admin_debug_form'),
+    'access callback'  => 'user_access',
+    'access arguments' => array('administer kkb_epay'),
+    'file'             => 'kkb_epay.admin.inc',
+    'type'             => MENU_NORMAL_ITEM,
+  );
+
+  $items['admin/config/services/epay/private-key'] => array(
+    'title'            => 'KKB Epay private key configuration',
+    'description'      => t('Check the existing or add a new private key.'),
+    'page callback'    => 'drupal_get_form',
+    'page arguments'   => array('kkb_epay_admin_private_key_form'),
+    'access callback'  => 'user_access',
+    'access arguments' => array('administer kkb_epay'),
+    'file'             => 'kkb_epay.admin.inc',
+    'type'             => MENU_NORMAL_ITEM,
+  );
+
+  $items['admin/config/services/epay/save-private-key'] => array(
+    'title'            => 'KKB Epay private key configuration',
+    'description'      => t('Save imported private key into configuration file.'),
+    'page callback'    => 'kkb_epay_admin_private_key_save_page',
+    'access callback'  => 'user_access',
+    'access arguments' => array('administer kkb_epay'),
+    'file'             => 'kkb_epay.admin.inc',
+    'type'             => MENU_CALLBACK,
   );
 
   return $items;
