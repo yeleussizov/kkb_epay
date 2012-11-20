@@ -105,7 +105,7 @@ final class KkbEpay_Key
     if (!is_string($id)) {
       throw new KkbEpay_KeyException('Certificate ID must be a string.');
     }
-    if (!preg_match('/^[A-Fa-F0-9]{10}$/', $id)) {
+    if (!preg_match('/^[A-Fa-f0-9]{10}$/', $id)) {
       throw new KkbEpay_KeyException('Certificate ID does not much expected format. It must be exactly 10 characters long and consist of hexadecimal digits.');
     }
     $this->_certificate_id = strtoupper($id);
