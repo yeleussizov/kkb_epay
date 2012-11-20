@@ -194,12 +194,12 @@ function kkb_epay_admin_private_key_save_page() {
   $page['help'] = array(
     array(
       '#prefix' => '<p>',
-      '#markup' => t('Your private key has been imported, but it was not yet saved. These instructions will tell you how to do it.'),
+      '#markup' => t('<strong>Your private key has been imported, but it was not yet saved.</strong> These instructions will tell you how to do it.'),
       '#suffix' => '</p>',
     ),
     array(
       '#prefix' => '<p>',
-      '#markup' => t('The private key must be kept in secret because anyone who has it can perform financial operations on your behalf, for example, debit any credit cards, cancel payments, transfer money from your account, etc.'),
+      '#markup' => t('The private key must be kept <strong>in secret</strong> because anyone who has it can perform financial operations on your behalf, for example, debit any credit cards, cancel payments, transfer money from your account, etc.'),
       '#suffix' => '</p>',
     ),
   );
