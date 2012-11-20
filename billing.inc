@@ -26,6 +26,11 @@ function kkb_epay_sign_message($message) {
     return $sign->sign64($message);
   }
   catch (KkbEpay_Exception $ex) {
+    drupal_set_message(t('There is a problem with the key, message was no signed. Check logs for details.'), 'error');
+    watchdog('kkb_epay', $ex->getMessage(), array(), WATCHDOG_ERROR);
+    if ($previous = $ex->getPrevious()) {
+      watchdog('kkb_epay', $previous->getMessage(), array(), WATCHDOG_ERROR);
+    }
     return NULL;
   }
 }
@@ -50,6 +55,11 @@ function kkb_epay_check_signature($message, $signature) {
     return $checker->check64($message, $signature);
   }
   catch (KkbEpay_Exception $ex) {
+    drupal_set_message(t('There is a problem with the certificate. Check logs for details.'), 'error');
+    watchdog('kkb_epay', $ex->getMessage(), array(), WATCHDOG_ERROR);
+    if ($previous = $ex->getPrevious()) {
+      watchdog('kkb_epay', $previous->getMessage(), array(), WATCHDOG_ERROR);
+    }
     return FALSE;
   }
 }
