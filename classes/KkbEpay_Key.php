@@ -2,6 +2,9 @@
 
 /**
  * Representation of a RSA private key that can be used to sign text messages.
+ *
+ * All setters in this class perform input validation. If any validation
+ * constraint is violated, a KkbEpay_KeyException is thrown.
  */
 final class KkbEpay_Key
 {
