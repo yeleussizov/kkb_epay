@@ -109,55 +109,6 @@ function kkb_epay_permission() {
 }
 
 /**
- * Signs a message with the default key.
- *
- * @return string|NULL
- *   Returnes NULL if any errors happen. Otherwise, returns base64-encoded
- *   signature.
- */
-function kkb_epay_sign_message($message) {
-  $loader = new KkbEpay_DrupalKeyLoader();
-  $loader->setDebug(kkb_epay_debug_status());
-
-  if (!$loader->validateKey()) {
-    drupal_set_message(t('Private key could not be loaded. Message will not be signed.'), 'error');
-    return NULL;
-  }
-
-  $sign = new KkbEpay_Sign($loader->getKey());
-  try {
-    return $sign->sign64($message);
-  }
-  catch (KkbEpay_Exception $ex) {
-    return NULL;
-  }
-}
-
-/**
- * Checks a message signature with the default certificate.
- *
- * @param text $message
- *   Message whose signature must be verified.
- *
- * @param text $signature
- *   Base64-encoded signature of the message.
- *
- * @return boolean
- *   TRUE if signature was check without errors.
- *   FALSE otherwise.
- */
-function kkb_epay_check_signature($message, $signature) {
-  $certificate = new KkbEpay_DefaultBankCertificate();
-  try {
-    $checker = new KkbEpay_Checker($certificate);
-    return $checker->check64($message, $signature);
-  }
-  catch (KkbEpay_Exception $ex) {
-    return FALSE;
-  }
-}
-
-/**
  * Returnes the current debugging status.
  *
  * @return boolean
