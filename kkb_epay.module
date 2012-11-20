@@ -29,6 +29,17 @@ function kkb_epay_create_billing_statement() {
 }
 
 /**
+ * Returnes the current debugging status.
+ *
+ * @return boolean
+ *   TRUE if debugging mode is turned on.
+ *   FALSE if debugging mode is turned off.
+ */
+function kkb_epay_debug_status() {
+  return (bool) variable_get('kkb_epay_debug_status', FALSE);
+}
+
+/**
  * Implements hook_init().
  */
 function kkb_epay_init() {
@@ -126,16 +137,5 @@ function kkb_epay_permission() {
       'restrict access' => TRUE,
     ),
   );
-}
-
-/**
- * Returnes the current debugging status.
- *
- * @return boolean
- *   TRUE if debugging mode is turned on.
- *   FALSE if debugging mode is turned off.
- */
-function kkb_epay_debug_status() {
-  return (bool) variable_get('kkb_epay_debug_status', FALSE);
 }
 
