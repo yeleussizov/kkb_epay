@@ -209,7 +209,7 @@ function kkb_epay_theme($existing, $type, $theme, $path) {
       'merchant' => '',
       'signature' => '',
     ),
-  ),
+  );
 
   return $hooks;
 }
