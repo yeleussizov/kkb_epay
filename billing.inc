@@ -156,7 +156,7 @@ function kkb_epay_bank_response_document_validate($document) {
     return FALSE;
   }
 
-  return kkb_epay_check_signature($bank, strval($xml->bank_sign)));
+  return kkb_epay_check_signature($bank, strval($xml->bank_sign));
 }
 
 /**
