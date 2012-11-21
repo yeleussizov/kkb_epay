@@ -39,5 +39,7 @@ function kkb_epay_callback_post_success($id) {
  * Menu page callback. Processing center response callback.
  */
 function kkb_epay_callback_post_failure($id) {
+  // TODO
+  echo '0';
 }
 
