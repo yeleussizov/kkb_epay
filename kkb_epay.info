@@ -8,6 +8,7 @@ package = Other
 files[] = classes/KkbEpay_BankCertificateInterface.php
 files[] = classes/KkbEpay_Checker.php
 files[] = classes/KkbEpay_DefaultBankCertificate.php
+files[] = classes/KkbEpay_DebugKeyLoader.php
 files[] = classes/KkbEpay_DrupalKeyLoader.php
 files[] = classes/KkbEpay_Exception.php
 files[] = classes/KkbEpay_Key.php
