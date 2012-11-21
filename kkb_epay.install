@@ -59,7 +59,7 @@ function kkb_epay_requirements($phase) {
 function kkb_epay_install() {
   // Saving debugging key in a more convenient format.
   // It is easier to switch between two variables than between two key loaders.
-  $key_loader = new KkbEpay_DebugKeyLoader.php();
+  $key_loader = new KkbEpay_DebugKeyLoader();
   $key_loader->setDebug(TRUE);
   $key = $key_loader->getKey();
 
