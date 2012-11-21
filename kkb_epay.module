@@ -211,6 +211,13 @@ function kkb_epay_theme($existing, $type, $theme, $path) {
     ),
   );
 
+  $hooks['kkb_epay_order_appendix'] = array(
+    'template' => 'templates/order-appendix.tpl.php',
+    'variables' => array(
+      'items' => array(),
+    ),
+  );
+
   return $hooks;
 }
 
