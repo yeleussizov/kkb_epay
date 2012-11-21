@@ -17,5 +17,6 @@ files[] = classes/KkbEpay_KeyLoaderInterface.php
 files[] = classes/KkbEpay_Order.php
 files[] = classes/KkbEpay_OrderItem.php
 files[] = classes/KkbEpay_OpenSSLException.php
+files[] = classes/KkbEpay_PaymentNotification.php
 files[] = classes/KkbEpay_Sign.php
 
