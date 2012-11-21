@@ -14,6 +14,8 @@ class KkbEpay_Order
 
   protected $_currency;
 
+  protected $_items = array();
+
 
   public function __construct($order_id = NULL)
   {
@@ -62,6 +64,21 @@ class KkbEpay_Order
     return $this->setAmount($amount, 398);
   }
 
+  public function setItems(array $items)
+  {
+    $this->_items = array();
+    foreach ($items as $i) {
+      $this->addItem($i);
+    }
+    return $this;
+  }
+
+  public function addItem(KkbEpay_OrderItem $i)
+  {
+    $this->_items[] = $i;
+    return $this;
+  }
+
   public function getId()
   {
     return $this->_order_id;
@@ -75,6 +92,11 @@ class KkbEpay_Order
   public function getCurrency()
   {
     return $this->_currency;
+  }
+
+  public function getItems()
+  {
+    return $this->_items;
   }
 
   protected function _isSuportedCurrency($code)
