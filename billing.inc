@@ -119,3 +119,12 @@ function kkb_epay_processing_gateway_url() {
   }
 }
 
+/**
+ * Returns an appendix document with a list of items in an order.
+ */
+function kkb_epay_create_order_appendix(KkbEpay_Order $order) {
+  return theme('kkb_epay_order_appendix', array(
+    'items' => $order->getItems(),
+  ));
+}
+
