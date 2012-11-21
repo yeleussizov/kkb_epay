@@ -159,3 +159,15 @@ function kkb_epay_bank_response_document_validate($document) {
   return kkb_epay_check_signature($bank, strval($xml->bank_sign))) {
 }
 
+/**
+ * Extracts information about payment from response document.
+ */
+function kkb_epay_bank_response_document_parse($document) {
+  $xml = @simplexml_load_string($document);
+
+  return new KkbEpay_PaymentNotification(array(
+    'order_id' => $xml->xpath('//order/@order_id'),
+    'timestamp' => strtotime($xml->xpath('//results/@timestamp')),
+    'amount' => $xml->xpath('//payment/@amount'),
+  ));
+}
