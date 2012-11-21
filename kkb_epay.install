@@ -53,3 +53,24 @@ function kkb_epay_requirements($phase) {
   return $requirements;
 }
 
+/**
+ * Implements hook_install().
+ */
+function kkb_epay_install() {
+  // Saving debugging key in a more convenient format.
+  // It is easier to switch between two variables than between two key loaders.
+  $key_loader = new KkbEpay_DebugKeyLoader.php();
+  $key_loader->setDebug(TRUE);
+  $key = $key_loader->getKey();
+
+  $key_data = array(
+    'key' => $key->getKey(),
+    'password' => $key->getPassword(),
+    'merchant_id' => $key->getMerchantId(),
+    'merchant_name' => $key->getMerchantName(),
+    'certificate_id' => $key->getCertificateId(),
+  );
+  $packed = _kkb_epay_pack_private_key($key_data);
+  variable_set('kkb_epay_private_key_debug', $packed);
+}
+
