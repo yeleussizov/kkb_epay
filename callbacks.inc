@@ -20,7 +20,7 @@ function kkb_epay_callback_back_failure($id) {
 /**
  * Menu page callback. Processing center response callback.
  */
-function kkb_epay_callback_post_success($id) {
+function kkb_epay_callback_post_success() {
   if (empty($_POST['response'])) {
     echo '0';
     drupal_exit();
@@ -38,7 +38,7 @@ function kkb_epay_callback_post_success($id) {
 /**
  * Menu page callback. Processing center response callback.
  */
-function kkb_epay_callback_post_failure($id) {
+function kkb_epay_callback_post_failure() {
   // TODO
   echo '0';
 }
