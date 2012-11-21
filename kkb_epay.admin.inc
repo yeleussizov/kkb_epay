@@ -208,7 +208,7 @@ function kkb_epay_admin_private_key_save_page() {
     '#type' => 'textarea',
     '#title' => t('Place this code into your settings.php file:'),
     '#value' => $conf,
-    '#rows' => 20,
+    '#rows' => 30,
     '#cols' => 80,
     '#attributes' => array(
       'readonly' => 'readonly',
