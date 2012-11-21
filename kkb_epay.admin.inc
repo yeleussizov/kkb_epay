@@ -163,18 +163,10 @@ function kkb_epay_admin_private_key_form_validate($form, &$form_state) {
  *   settings.php file and not ask user to do it manually.
  */
 function kkb_epay_admin_private_key_form_submit($form, &$form_state) {
-  $packed = _kkb_epay_admin_private_key_pack($form_state['values']['key_data']);
+  $packed = _kkb_epay_pack_private_key($form_state['values']['key_data']);
 
   $_SESSION['kkb_epay']['packed_private_key'] = $packed;
   $form_state['redirect'] = 'admin/config/services/epay/save-private-key';
-}
-
-/**
- * Packs information about a private key in the format used by the
- * KkbEpay_DrupalKeyLoader.
- */
-function _kkb_epay_admin_private_key_pack($data) {
-  return implode("\n", str_split(base64_encode(serialize($data)), 64));
 }
 
 /**

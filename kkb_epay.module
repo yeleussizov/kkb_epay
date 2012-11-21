@@ -234,3 +234,11 @@ function kkb_epay_permission() {
   );
 }
 
+/**
+ * Packs information about a private key in the format used by the
+ * KkbEpay_DrupalKeyLoader.
+ */
+function _kkb_epay_pack_private_key($data) {
+  return implode("\n", str_split(base64_encode(serialize($data)), 64));
+}
+
