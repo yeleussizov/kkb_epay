@@ -98,7 +98,7 @@ function kkb_epay_create_signed_order(KkbEpay_Order $order) {
   ));
 
   return theme('kkb_epay_signed_order', array(
-    'merchant'  => $merchant,
+    'merchant'  => $merchant_data,
     'signature' => kkb_epay_sign_message($merchant_data),
   ));
 }
