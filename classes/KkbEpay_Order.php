@@ -76,6 +76,7 @@ class KkbEpay_Order
   public function addItem(KkbEpay_OrderItem $i)
   {
     $this->_items[] = $i;
+    $i->setNumber(count($this->_items));
     return $this;
   }
 
