@@ -37,7 +37,7 @@ function kkb_epay_create_billing_statement(KkbEpay_Order $order, $account) {
 
   $form = array();
   $form['#type'] = 'form';
-  $form['#action'] = kkb_epay_payment_form_submit_url();
+  $form['#action'] = kkb_epay_processing_gateway_url();
 
   $form['Signed_Order_64'] = array(
     '#type' => 'hidden',
