@@ -6,12 +6,12 @@
  */
 
 /**
- * Loads current private key with the default Kkb_DrupalKeyLoader.
+ * Loads current private key with the default KkbEpay_DrupalKeyLoader.
  */
 function kkb_epay_load_default_key() {
   static $key = NULL;
   if (!isset($key)) {
-    $loader = new Kkb_DrupalKeyLoader();
+    $loader = new KkbEpay_DrupalKeyLoader();
     $loader->setDebug(kkb_epay_debug_status());
     $key = $loader->getKey();
   }
