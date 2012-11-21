@@ -6,18 +6,19 @@
  */
 
 /**
- * Prepares a complete valid form element ready to be submitted to the
- * authorization server.
+ * Prepares a complete valid form ready to be submitted to the processing
+ * server.
  *
- * Form is prepared and returned in a form of Drupal's renderable array.
- * The caller party is free to modify the form before rendering it. The most
- * common reason to modify the form is to add/modify submit buttons or some
- * textual annotations.
+ * This form is created as a standard Drupal form. Modifications can be made
+ * with the help of hook_form_alter() hooks, however, it is very important not
+ * to change values of any existing field.
+ *
+ * The most common reason to modify the form is to add/modify submit buttons
+ * or some textual annotations.
  *
  * @warning
- *   The returned form is not a complete Drupal form that can be submitted back
- *   to the site and handled by drupal_build_form() function. This form must
- *   be submitted directly to the authorization server.
+ *   This form must be submitted directly to the processing center.
+ *   Form action must never be modified.
  *
  * @param KkbEpay_Order $order
  *   Information about order that must be payed.
@@ -32,12 +33,11 @@
  * @return
  *   Complete definition of a billing form in a form of a renderable array.
  */
-function kkb_epay_create_billing_statement(KkbEpay_Order $order, $account) {
+function kkb_epay_billing_statement($form, &$form_state, KkbEpay_Order $order, $account) {
   module_load_include('inc', 'kkb_epay', 'billing');
 
-  $form = array();
-  $form['#type'] = 'form';
   $form['#action'] = kkb_epay_processing_gateway_url();
+  $form['#method'] = 'post';
 
   $form['Signed_Order_64'] = array(
     '#type' => 'hidden',
