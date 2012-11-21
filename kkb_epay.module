@@ -65,7 +65,7 @@ function kkb_epay_create_billing_statement(KkbEpay_Order $order, $account) {
   );
   $form['appendix'] = array(
     '#type' => 'hidden',
-    '#value' => '', // FIXME
+    '#value' => base64_encode(kkb_epay_create_order_appendix($order)),
   ),
 
   $form['actions'] = array(
