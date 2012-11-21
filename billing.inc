@@ -128,3 +128,34 @@ function kkb_epay_create_order_appendix(KkbEpay_Order $order) {
   ));
 }
 
+/**
+ * Validates response document received from the processing center.
+ *
+ * Document must have correct structure and valid signature.
+ *
+ * @param string $document
+ *   Response received from the center.
+ *
+ * @return boolean
+ */
+function kkb_epay_bank_response_document_validate($document) {
+  if (substr($document, 0, 10) != '<document>') return FALSE;
+  if (substr($document, -11) != '</document>') return FALSE;
+  if (strpos($document, '</bank>') === FALSE) return FALSE;
+
+  libxml_use_internal_errors(TRUE);
+  $xml = @simplexml_load_string($document);
+  if (!$xml) {
+    return FALSE;
+  }
+
+  $body = substr($document, 10, strlen($document) - 21);
+  $bank = substr($body, 0, strpos($body, '</bank>') + 7);
+
+  if (!$xml->bank_sign || !strval($xml->bank_sign)) {
+    return FALSE;
+  }
+
+  return kkb_epay_check_signature($bank, strval($xml->bank_sign))) {
+}
+
