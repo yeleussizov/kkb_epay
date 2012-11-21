@@ -18,7 +18,7 @@ function kkb_epay_callback_back_failure($id) {
 }
 
 /**
- * Menu page callback. Processing center response callback.
+ * Menu page callback. Handles success response from the processing center.
  */
 function kkb_epay_callback_post_success() {
   if (empty($_POST['response'])) {
@@ -36,7 +36,7 @@ function kkb_epay_callback_post_success() {
 }
 
 /**
- * Menu page callback. Processing center response callback.
+ * Menu page callback. Handles failure resposne from the processing center.
  */
 function kkb_epay_callback_post_failure() {
   // TODO
