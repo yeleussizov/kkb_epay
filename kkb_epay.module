@@ -80,7 +80,7 @@ function kkb_epay_create_billing_statement(KkbEpay_Order $order, $account) {
 }
 
 /**
- * Returnes the current debugging status.
+ * Returns the current debugging status.
  *
  * @return boolean
  *   TRUE if debugging mode is turned on.

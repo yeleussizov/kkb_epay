@@ -22,7 +22,7 @@ function kkb_epay_load_default_key() {
  * Signs a message with the default key.
  *
  * @return string|NULL
- *   Returnes NULL if any errors happen. Otherwise, returns base64-encoded
+ *   Returns NULL if any errors happen. Otherwise, returns base64-encoded
  *   signature.
  */
 function kkb_epay_sign_message($message) {
