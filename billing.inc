@@ -112,6 +112,7 @@ function kkb_epay_create_signed_order(KkbEpay_Order $order) {
     'merchant_sign',
     kkb_epay_sign_message($dom->saveXML($merchant))
   );
+  $sign->setAttribute('type', 'RSA');
   $document->appendChild($sign);
 
   return $dom->saveXML($document);
