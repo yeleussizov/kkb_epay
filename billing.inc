@@ -137,9 +137,19 @@ function kkb_epay_processing_gateway_url() {
  * Returns an appendix document with a list of items in an order.
  */
 function kkb_epay_create_order_appendix(KkbEpay_Order $order) {
-  return theme('kkb_epay_order_appendix', array(
-    'items' => $order->getItems(),
-  ));
+  $dom = new DOMDocument('1.0', 'UTF-8');
+
+  $document = $dom->createElement('document');
+  foreach ($order->getItems() as $i) {
+    $item = $dom->createElement('item');
+    $item->setAttribute('number',   $i->getNumber());
+    $item->setAttribute('name',     $i->getName());
+    $item->setAttribute('quantity', $i->getQuantity());
+    $item->setAttribute('amount',   $i->getAmount());
+    $document->appendChild($item);
+  }
+
+  return $dom->saveXML($document);
 }
 
 /**
