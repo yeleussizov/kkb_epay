@@ -39,7 +39,7 @@ function kkb_epay_billing_statement($form, &$form_state, KkbEpay_Order $order, $
   $form['#action'] = kkb_epay_processing_gateway_url();
   $form['#method'] = 'post';
 
-  $form['Signed_Order_64'] = array(
+  $form['Signed_Order_B64'] = array(
     '#type' => 'hidden',
     '#value' => base64_encode(kkb_epay_create_signed_order($order)),
   );
