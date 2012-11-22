@@ -20,7 +20,7 @@ function kkb_epay_callback_back_success($id) {
       '#prefix' => '<p>',
       '#markup' => l(t('Back to front page.'), '<front>'),
       '#suffix' => '</p>',
-    ),
+    );
   }
   return $page;
 }
@@ -40,7 +40,7 @@ function kkb_epay_callback_back_failure($id) {
       '#prefix' => '<p>',
       '#markup' => l(t('Back to front page.'), '<front>'),
       '#suffix' => '</p>',
-    ),
+    );
   }
   return $page;
 }
