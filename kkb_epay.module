@@ -184,42 +184,6 @@ function kkb_epay_menu() {
 }
 
 /**
- * Implements hook_theme().
- */
-function kkb_epay_theme($existing, $type, $theme, $path) {
-  $hooks = array();
-
-  $hooks['kkb_epay_merchant_data'] = array(
-    'template' => 'templates/merchant-data',
-    'variables' => array(
-      'amount' => '',
-      'certificate_id' => '',
-      'currency' => '',
-      'merchant_id' => '',
-      'merchant_name' => '',
-      'order_id' => '',
-    ),
-  );
-
-  $hooks['kkb_epay_signed_order'] = array(
-    'template' => 'templates/signed-order',
-    'variables' => array(
-      'merchant' => '',
-      'signature' => '',
-    ),
-  );
-
-  $hooks['kkb_epay_order_appendix'] = array(
-    'template' => 'templates/order-appendix',
-    'variables' => array(
-      'items' => array(),
-    ),
-  );
-
-  return $hooks;
-}
-
-/**
  * Implements hook_permission().
  */
 function kkb_epay_permission() {
