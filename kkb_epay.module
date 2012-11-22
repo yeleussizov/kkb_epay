@@ -166,14 +166,14 @@ function kkb_epay_menu() {
     'type'             => MENU_CALLBACK,
   );
 
-  $items['epay/post/success/'] = array(
+  $items['epay/post/success'] = array(
     'page callback'    => 'kkb_epay_callback_post_success',
     'access callback'  => TRUE,
     'file'             => 'callbacks.inc',
     'type'             => MENU_CALLBACK,
   );
 
-  $items['epay/post/failure/'] = array(
+  $items['epay/post/failure'] = array(
     'page callback'    => 'kkb_epay_callback_post_failure',
     'access callback'  => TRUE,
     'file'             => 'callbacks.inc',
