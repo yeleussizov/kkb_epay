@@ -28,7 +28,7 @@ final class KkbEpay_Sign
   /**
    * Signs given message with loaded private key.
    *
-   * @param string @message
+   * @param string $message
    *   Message that must be signed, as a string. Cannot be empty.
    *
    * @return
