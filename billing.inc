@@ -100,6 +100,8 @@ function kkb_epay_create_signed_order(KkbEpay_Order $order) {
   $order      ->setAttribute('amount',      $order->getAmount());
   $order      ->setAttribute('currency',    $order->getCurrency());
   $order      ->setAttribute('order_id',    $order->getId());
+  $department ->setAttribute('abonent_id',  '');
+  $department ->setAttribute('terminal',    '');
 
   $dom->appendChild($document);
   $document->appendChild($merchant);
