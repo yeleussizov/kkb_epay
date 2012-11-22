@@ -39,7 +39,7 @@ class KkbEpay_PaymentNotification
    *   - TRUE, padding zeros are removed from the beginning;
    *   - FALSE, order ID is returned as is.
    */
-  public function getOrderId($remove_padding = FALSE)
+  public function getOrderId($remove_padding = TRUE)
   {
     $id = $this->_order_id;
     if ($remove_padding) {
