@@ -100,7 +100,7 @@ function kkb_epay_admin_private_key_form($form, &$form_state) {
     '#title' => t('Private key password:'),
     '#size' => 60,
     '#maxlegnth' => 255,
-    '#required' => TRUE,
+    '#required' => FALSE,
   );
 
   $form['key_data']['key'] = array(
