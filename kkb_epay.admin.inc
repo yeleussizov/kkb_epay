@@ -44,7 +44,7 @@ function kkb_epay_admin_debug_form_validate($form, &$form_state) {
   require_once DRUPAL_ROOT . '/' . variable_get('password_inc', 'includes/password.inc');
 
   if (!user_check_password($form_state['values']['password_confirmation'], $user)) {
-    form_set_error('password_confirmation', t('Your password is incorrect.'));
+    form_set_error('password_confirmation', t('Incorrect password.'));
   }
 }
 
