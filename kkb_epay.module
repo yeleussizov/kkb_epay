@@ -18,7 +18,7 @@
  *
  * @warning
  *   This form must be submitted directly to the processing center.
- *   Form action must never be modified.
+ *   Form #action parameter must never be modified.
  *
  * @param KkbEpay_Order $order
  *   Information about order that must be payed.
