@@ -85,22 +85,34 @@ function kkb_epay_check_signature($message, $signature) {
  *   Order document as a string. The document is not base64 encoded.
  */
 function kkb_epay_create_signed_order(KkbEpay_Order $order) {
+  $dom = new DOMDocument('1.0', 'UTF-8');
   $key = kkb_epay_load_default_key();
 
-  $merchant_data = theme('kkb_epay_merchant_data', array(
-    'amount'         => $order->getAmount(),
-    'currency'       => $order->getCurrency(),
-    'order_id'       => $order->getId(),
+  $document   = $dom->createElement('document');
+  $merchant   = $dom->createElement('merchant');
+  $order      = $dom->createElement('order');
+  $department = $dom->createElement('department');
 
-    'certificate_id' => $key->getCertificateId(),
-    'merchant_id'    => $key->getMerchantId(),
-    'merchant_name'  => $key->getMerchantName(),
-  ));
+  $merchant   ->setAttribute('cert_id',     $key->getCertificateId());
+  $merchant   ->setAttribute('name',        $key->getMerchantName());
+  $department ->setAttribute('merchant_id', $key->getMerchantId());
+  $department ->setAttribute('amount',      $order->getAmount());
+  $order      ->setAttribute('amount',      $order->getAmount());
+  $order      ->setAttribute('currency',    $order->getCurrency());
+  $order      ->setAttribute('order_id',    $order->getId());
 
-  return theme('kkb_epay_signed_order', array(
-    'merchant'  => $merchant_data,
-    'signature' => kkb_epay_sign_message($merchant_data),
-  ));
+  $dom->appendChild($document);
+  $document->appendChild($merchant);
+  $merchant->appendChild($order);
+  $order->appendChild($department);
+
+  $sign = $dom->createElement(
+    'merchant_sign',
+    kkb_epay_sign_message($dom->saveXML($merchant))
+  );
+  $document->appendChild($sign);
+
+  return $dom->saveXML($document);
 }
 
 /**
