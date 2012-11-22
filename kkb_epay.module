@@ -57,11 +57,11 @@ function kkb_epay_billing_statement($form, &$form_state, KkbEpay_Order $order, $
   );
   $form['PostLink'] = array(
     '#type' => 'hidden',
-    '#value' => url('epay/post/success/' . $order->getId(), array('absolute' => TRUE)),
+    '#value' => url('epay/post/success', array('absolute' => TRUE)),
   );
   $form['FailurePostLink'] = array(
     '#type' => 'hidden',
-    '#value' => url('epay/post/failure/' . $order->getId(), array('absolute' => TRUE)),
+    '#value' => url('epay/post/failure', array('absolute' => TRUE)),
   );
   $form['appendix'] = array(
     '#type' => 'hidden',
