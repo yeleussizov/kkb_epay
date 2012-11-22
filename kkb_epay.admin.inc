@@ -2,7 +2,7 @@
 
 /**
  * @file kkb_epay.admin.inc
- *   Admin page callback.
+ *   Admin page callbacks.
  */
 
 /**
@@ -131,7 +131,7 @@ function kkb_epay_admin_private_key_form($form, &$form_state) {
  * The KkbEpay_Key model is capable of self-validation and since its
  * constraints can be quite complicated, it would be inefficient to repeat all
  * of them here. That is why we will create an instance of KkbEpay_Key class,
- * set it with inputed values and catch any validation error.
+ * set it with inputed values and catch any validation errors.
  */
 function kkb_epay_admin_private_key_form_validate($form, &$form_state) {
   $key = new KkbEpay_Key();
@@ -170,7 +170,7 @@ function kkb_epay_admin_private_key_form_submit($form, &$form_state) {
 }
 
 /**
- * Menu page callback. Displayes previously imported private key in a packaged
+ * Menu page callback. Displays previously imported private key in a packaged
  * format and gives futher instructions to the user.
  */
 function kkb_epay_admin_private_key_save_page() {
@@ -191,7 +191,7 @@ function kkb_epay_admin_private_key_save_page() {
     ),
     array(
       '#prefix' => '<p>',
-      '#markup' => t('The private key must be kept <strong>in secret</strong> because anyone who has it can perform financial operations on your behalf, for example, debit any credit cards, cancel payments, transfer money from your account, etc.'),
+      '#markup' => t('The private key must be kept <strong>in secret</strong> because anyone who has it can perform financial operations on your behalf; for example, debit any credit cards, cancel payments, transfer money from your account, etc.'),
       '#suffix' => '</p>',
     ),
     array(

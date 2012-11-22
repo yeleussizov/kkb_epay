@@ -58,7 +58,7 @@ function kkb_epay_sign_message($message) {
  *   Base64-encoded signature of the message.
  *
  * @return boolean
- *   TRUE if signature was check without errors.
+ *   TRUE if signature was verified without errors.
  *   FALSE otherwise.
  */
 function kkb_epay_check_signature($message, $signature) {
@@ -121,7 +121,7 @@ function kkb_epay_create_signed_order(KkbEpay_Order $order) {
 /**
  * Returns URL of the gateway that will be used to process payment.
  *
- * Returned value is different when debug mode on and off.
+ * Returned value is different when debugging mode is on or off.
  */
 function kkb_epay_processing_gateway_url() {
   if (kkb_epay_debug_status()) {
@@ -196,3 +196,4 @@ function kkb_epay_bank_response_document_parse($document) {
     'amount' => $xml->xpath('//payment/@amount'),
   ));
 }
+

@@ -33,7 +33,7 @@ function kkb_epay_callback_back_failure($id) {
   if (empty($page)) {
     $page['message'] = array(
       '#prefix' => '<p>',
-      '#markup' => t('<strong>Unfortunately your payments was not completed.</strong>'),
+      '#markup' => t('<strong>Unfortunately your payment was not completed.</strong>'),
       '#suffix' => '</p>',
     );
     $page['return'] = array(
@@ -64,7 +64,7 @@ function kkb_epay_callback_post_success() {
 }
 
 /**
- * Menu page callback. Handles failure resposne from the processing center.
+ * Menu page callback. Handles failure response from the processing center.
  */
 function kkb_epay_callback_post_failure() {
   // TODO

@@ -24,14 +24,14 @@
  *   Information about order that must be payed.
  *
  * @param object $account
- *   Account of a user who recieves the billing statement. Account is used to
- *   get user email and prefered language.
+ *   Account of a user who receives the billing statement. Account is used to
+ *   get user's email and preferred language.
  *
  * @todo
- *   Set interface language to user's prefered language.
+ *   Set interface language to user's preferred language.
  *
  * @return
- *   Complete definition of a billing form in a form of a renderable array.
+ *   Complete definition of a billing form in as Drupal's renderable array.
  */
 function kkb_epay_billing_statement($form, &$form_state, KkbEpay_Order $order, $account) {
   module_load_include('inc', 'kkb_epay', 'billing');
@@ -80,7 +80,7 @@ function kkb_epay_billing_statement($form, &$form_state, KkbEpay_Order $order, $
 }
 
 /**
- * Returns the current debugging status.
+ * Returns current debugging status.
  *
  * @return boolean
  *   TRUE if debugging mode is turned on.
