@@ -1,0 +1,160 @@
+<?php
+
+/**
+ * @file kkb_epay_example.module
+ *   An example module that implements 'kkb_epay' hooks to accept payments.
+ */
+
+define('KKB_EPAY_EXAMPLE_POINT_COST', 5);
+
+/**
+ * Implements hook_kkb_epay_payment().
+ */
+function kkb_epay_example_kkb_epay_payment($notification) {
+  $order = _kkb_epay_example_load_order($notification->getOrderId());
+  $order->payed = TRUE;
+  _kkb_epay_example_update_order($order);
+}
+
+/**
+ * Implements hook_kkb_epay_success_page().
+ */
+function kkb_epay_example_kkb_epay_success_page($order_id) {
+  $page = array();
+
+  $page['text'] = array(
+    '#markup' => '<p>Welcome back! Here, some points for you.</p>',
+  );
+
+  return $page;
+}
+
+/**
+ * Implements hook_kkb_epay_failure_page().
+ */
+function kkb_epay_example_kkb_epay_failure_page($order_id) {
+  $page = array();
+
+  $page['text'] = array(
+    '#markup' => '<p>Payment is not completed. No points for you.</p>',
+  );
+
+  return $page;
+}
+
+/**
+ * Implements hook_menu().
+ */
+function kkb_epay_example_menu() {
+  return array(
+    'kkb-epay-example/buy-points' => array(
+      'title' => 'Order new points',
+      'page callback' => 'drupal_get_form',
+      'page arguments' => array('kkb_epay_example_buy_points_form'),
+    ),
+    'kkb-epay-example/pay/%' => array(
+      'title' => 'Pay for ordered points',
+      'page callback' => 'kkb_epay_example_pay',
+      'page arguments' => array(2),
+    ),
+  );
+}
+
+/**
+ * Form builder.
+ */
+function kkb_epay_example_buy_points_form($form, &$form_state) {
+  $options = array();
+  for ($i = 1000; $i > 0; $i -= 100) {
+    $options[$i] = $i;
+  }
+  $form['points'] = array(
+    '#type' => 'select',
+    '#options' => $options,
+    '#title' => 'How many points do you want to buy?',
+    '#required' => TRUE,
+  );
+
+  $form['actions'] = array(
+    '#type' => 'actions',
+    'submit' => array(
+      '#type' => 'submit',
+      '#value' => 'Buy points',
+    ),
+  );
+
+  return $form;
+}
+
+/**
+ * Form submit callback.
+ */
+function kkb_epay_example_buy_points_form_submit($form, &$form_state) {
+  global $user;
+  $order_id = _kkb_epay_example_save_points_order(
+    $user, $form_state['values']['points']
+  );
+
+  $form_state['redirect'] = 'kkb-epay-example/pay/' . $order_id;
+}
+
+function kkb_epay_example_pay($order_id) {
+  global $user;
+  $page = array();
+
+  $order = _kkb_epay_example_load_order($order_id);
+  if ($order->uid != $user->uid) {
+    return MENU_ACCESS_DENIED:
+  }
+
+  $amount = $order->points * KKB_EPAY_EXAMPLE_POINT_COST;
+
+  $epay_order = new KkbEpay_Order($order_id);
+  $epay_order->setTengeAmount($amount);
+  $epay_order->addItem(new KkbEpay_OrderItem(
+    'Example points.', $amount, $order->points
+  ));
+
+  $page['info'] = array(
+    '#markup' => format_string(
+      '<p>You are buying %points points and it will cost you %amount tenge.</p>',
+      array('%points' => $order->points, '%amount' => $amount)
+    ),
+  );
+  $page['form'] = drupal_get_form('kkb_epay_billing_statement', $epay_order, $user);
+
+  return $page;
+}
+
+/**
+ * Pretends to save points order.
+ *
+ * It is just an example module, we do not really have to save anything.
+ */
+function _kkb_epay_example_save_points_order($account, $points) {
+  return 100;
+}
+
+/**
+ * Pretends to load points order.
+ *
+ * Storing and loading data from database is not the point of this example.
+ */
+function _kkb_epay_example_load_order($order_id) {
+  return (object) array(
+    'order_id' => $order_id,
+    'points' => 700,
+    'uid' => 0,
+  );
+}
+
+/**
+ * Pretends to update points order.
+ *
+ * This module does not define any tables to store orders, so we do not have
+ * to do anything.
+ */
+function _kkb_epay_example_update_order($order) {
+  return TRUE;
+}
+
