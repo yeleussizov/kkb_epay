@@ -12,7 +12,7 @@ Planned features and improvements:
 9.  Save all raw server responses into logs or database;
 10. Log every 'epay/post/success' page request;
 11. Send user's prefered laguage (rus|eng) to the payment page;
-12. Write API usage examples;
+12. <del>Write API usage examples</del>;
 13. Create kkb_epay_ubercart module;
 14. Create kkb_epay_commerce module;
 15. Add module description.
