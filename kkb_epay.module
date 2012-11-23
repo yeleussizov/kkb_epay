@@ -36,8 +36,10 @@
 function kkb_epay_billing_statement($form, &$form_state, KkbEpay_Order $order, $account) {
   module_load_include('inc', 'kkb_epay', 'billing');
 
-  $form['#action'] = kkb_epay_processing_gateway_url();
-  $form['#method'] = 'post';
+  $form['#action']  = kkb_epay_processing_gateway_url();
+  $form['#method']  = 'post';
+  $form['#order']   = $order;
+  $form['#account'] = $account;
 
   $form['Signed_Order_B64'] = array(
     '#type' => 'hidden',
