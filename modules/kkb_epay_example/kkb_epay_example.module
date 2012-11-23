@@ -22,7 +22,7 @@
  *      transform into a KkbEpay_Order object, load 'kkb_epay_billing_statement'
  *      form, display it to the user.
  *
- *      'kkb_epay_billing_statement' is the heart of the 'kkb_epay' module that
+ *      'kkb_epay_billing_statement' is the heart of the 'kkb_epay' module. It
  *      contains all information about a payment for the processing center,
  *      such as: payment amount, list of products in the order, recipient of
  *      the payment, etc. You cannot submit this form from the server-side;
@@ -44,20 +44,20 @@
  *      This hook accepts one argument - an instance of KkbEpay_PaymentNotification.
  *      It has information about order ID, payment amount and payment time.
  *
- *   4. Optionally implement hook_kkb_epay_success_page() and
+ *   4. Optionally, implement hook_kkb_epay_success_page() and
  *      hook_kkb_epay_failure_page().
  *
- *      This hooks simply create a landing place on your site where a user is
- *      redirected to after finishing payment. You can show a simple message
+ *      These hooks simply create a landing place on your site where a user is
+ *      redirected after finishing payment. You can show a simple message
  *      that says that the payment was completed (or not), or just redirect
  *      user to some other page with drupal_goto(). If you want to display
  *      a message, you must return a Drupal renderable array, which you would
  *      normally return from any other menu callback.
  *
  *      Warning!
- *      Do not modify you orders in this hooks. User can simply enter success
- *      page URL and go there directly without paying. These hooks must create
- *      a landing page only and must not modify any state on the site.
+ *      Do not modify you orders in these hooks. User can simply go directly to
+ *      the success page by entering its URL in a browser. These hooks must
+ *      create a landing page only and must not modify any state on the site.
  *
  *      If you do not implement either of these hooks, 'kkb_epay' module will
  *      provide a default page with a generic message.
