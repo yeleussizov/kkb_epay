@@ -16,3 +16,5 @@ Planned features and improvements:
 13. Create kkb_epay_ubercart module;
 14. Create kkb_epay_commerce module;
 15. Add module description.
+16. Add licencing and copyright information.
+
