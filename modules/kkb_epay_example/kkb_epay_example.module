@@ -65,6 +65,85 @@
 
 define('KKB_EPAY_EXAMPLE_POINT_COST', 5);
 
+
+// Step1
+
+/**
+ * Form builder. Builds a form for new order.
+ */
+function kkb_epay_example_buy_points_form($form, &$form_state) {
+  $options = array();
+  for ($i = 1000; $i > 0; $i -= 100) {
+    $options[$i] = $i;
+  }
+  $form['points'] = array(
+    '#type' => 'select',
+    '#options' => $options,
+    '#title' => 'How many points do you want to buy?',
+    '#required' => TRUE,
+  );
+
+  $form['actions'] = array(
+    '#type' => 'actions',
+    'submit' => array(
+      '#type' => 'submit',
+      '#value' => 'Buy points',
+    ),
+  );
+
+  return $form;
+}
+
+/**
+ * Form submit callback. Saves a new order and sends user to payment page.
+ */
+function kkb_epay_example_buy_points_form_submit($form, &$form_state) {
+  global $user;
+  $order_id = _kkb_epay_example_save_points_order(
+    $user, $form_state['values']['points']
+  );
+
+  $form_state['redirect'] = 'kkb-epay-example/pay/' . $order_id;
+}
+
+
+// Step 2
+
+/**
+ * Menu page callback. Transform order from internal structure to
+ * KkbEpay_Order object and displayes 'kkb_epay_billing_statement' form.
+ */
+function kkb_epay_example_pay($order_id) {
+  global $user;
+  $page = array();
+
+  $order = _kkb_epay_example_load_order($order_id);
+  if ($order->uid != $user->uid) {
+    return MENU_ACCESS_DENIED:
+  }
+
+  $amount = $order->points * KKB_EPAY_EXAMPLE_POINT_COST;
+
+  $epay_order = new KkbEpay_Order($order_id);
+  $epay_order->setTengeAmount($amount);
+  $epay_order->addItem(new KkbEpay_OrderItem(
+    'Example points.', $amount, $order->points
+  ));
+
+  $page['info'] = array(
+    '#markup' => format_string(
+      '<p>You are buying %points points and it will cost you %amount tenge.</p>',
+      array('%points' => $order->points, '%amount' => $amount)
+    ),
+  );
+  $page['form'] = drupal_get_form('kkb_epay_billing_statement', $epay_order, $user);
+
+  return $page;
+}
+
+
+// Step 3
+
 /**
  * Implements hook_kkb_epay_payment().
  */
@@ -73,6 +152,9 @@ function kkb_epay_example_kkb_epay_payment($notification) {
   $order->payed = TRUE;
   _kkb_epay_example_update_order($order);
 }
+
+
+// Step 4
 
 /**
  * Implements hook_kkb_epay_success_page().
@@ -100,6 +182,9 @@ function kkb_epay_example_kkb_epay_failure_page($order_id) {
   return $page;
 }
 
+
+// Other helpers
+
 /**
  * Implements hook_menu().
  */
@@ -116,72 +201,6 @@ function kkb_epay_example_menu() {
       'page arguments' => array(2),
     ),
   );
-}
-
-/**
- * Form builder.
- */
-function kkb_epay_example_buy_points_form($form, &$form_state) {
-  $options = array();
-  for ($i = 1000; $i > 0; $i -= 100) {
-    $options[$i] = $i;
-  }
-  $form['points'] = array(
-    '#type' => 'select',
-    '#options' => $options,
-    '#title' => 'How many points do you want to buy?',
-    '#required' => TRUE,
-  );
-
-  $form['actions'] = array(
-    '#type' => 'actions',
-    'submit' => array(
-      '#type' => 'submit',
-      '#value' => 'Buy points',
-    ),
-  );
-
-  return $form;
-}
-
-/**
- * Form submit callback.
- */
-function kkb_epay_example_buy_points_form_submit($form, &$form_state) {
-  global $user;
-  $order_id = _kkb_epay_example_save_points_order(
-    $user, $form_state['values']['points']
-  );
-
-  $form_state['redirect'] = 'kkb-epay-example/pay/' . $order_id;
-}
-
-function kkb_epay_example_pay($order_id) {
-  global $user;
-  $page = array();
-
-  $order = _kkb_epay_example_load_order($order_id);
-  if ($order->uid != $user->uid) {
-    return MENU_ACCESS_DENIED:
-  }
-
-  $amount = $order->points * KKB_EPAY_EXAMPLE_POINT_COST;
-
-  $epay_order = new KkbEpay_Order($order_id);
-  $epay_order->setTengeAmount($amount);
-  $epay_order->addItem(new KkbEpay_OrderItem(
-    'Example points.', $amount, $order->points
-  ));
-
-  $page['info'] = array(
-    '#markup' => format_string(
-      '<p>You are buying %points points and it will cost you %amount tenge.</p>',
-      array('%points' => $order->points, '%amount' => $amount)
-    ),
-  );
-  $page['form'] = drupal_get_form('kkb_epay_billing_statement', $epay_order, $user);
-
-  return $page;
 }
 
 /**
