@@ -9,7 +9,7 @@
  * Menu page callback. User landing page, payment was successful.
  */
 function kkb_epay_callback_back_success($id) {
-  $page = module_invoke_all('kkb_epay_payment_success_page', $id);
+  $page = module_invoke_all('kkb_epay_success_page', $id);
   if (empty($page)) {
     $page['message'] = array(
       '#prefix' => '<p>',
@@ -29,7 +29,7 @@ function kkb_epay_callback_back_success($id) {
  * Menu page callback. User landing page, payment failed.
  */
 function kkb_epay_callback_back_failure($id) {
-  $page = module_invoke_all('kkb_epay_payment_failure_page', $id);
+  $page = module_invoke_all('kkb_epay_failure_page', $id);
   if (empty($page)) {
     $page['message'] = array(
       '#prefix' => '<p>',
