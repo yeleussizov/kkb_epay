@@ -10,12 +10,34 @@
  *
  * This hook is called only when the processing center sends a correct
  * confirmation about completed payment.
+ *
+ * @warning
+ *   Under certain conditions, site can receive more than one notification
+ *   about successful payment of the same order. It is responsibility of your
+ *   code to check that this is the first notification about an order.
+ *   If this is NOT the first notification, and the order is already marked as
+ *   payed, ignore the notification and do not perform any actions.
+ *
  */
 function hook_kkb_epay_payment(KkbEpay_PaymentNotification $notification) {
+  $order = my_module_load_order($notification->getOrderId());
+  if (!$order) {
+    // Order not found. This is a very exceptional situation, but is still
+    // worth checking.
+    return;
+  }
+  if ($oder->payed) {
+    // Order is already payed, notification was repeated. Return early because
+    // we do not want to send two confirmation emails.
+    return;
+  }
+
   db_update('my_orders')
     ->fields(array('payed' => 1))
     ->condition('order_id', $notification->getOrderId())
     ->execute();
+
+  my_module_send_payment_confirmation($order);
 }
 
 /**
