@@ -188,12 +188,30 @@ function kkb_epay_bank_response_document_validate($document) {
  * Extracts information about payment from response document.
  */
 function kkb_epay_bank_response_document_parse($document) {
-  $xml = @simplexml_load_string($document);
+  $xml       = @simplexml_load_string($document);
+  $order_id  = 0;
+  $timestamp = REQUEST_TIME;
+  $amount    = 0.0;
+
+  $xpath = $xml->xpath('//order/@order_id');
+  if ($elem = array_shift($xpath)) {
+    $order_id = (string) $elem->order_id;
+  }
+
+  $xpath = $xml->xpath('//results/@timestamp');
+  if ($elem = array_shift($xpath)) {
+    $timestamp = strtotime((string) $elem->order_id);
+  }
+
+  $xpath = $xml->xpath('//payment/@amoun');
+  if ($elem = array_shift($xpath)) {
+    $amount = (string) $elem->amount;
+  }
 
   return new KkbEpay_PaymentNotification(array(
-    'order_id' => $xml->xpath('//order/@order_id'),
-    'timestamp' => strtotime($xml->xpath('//results/@timestamp')),
-    'amount' => $xml->xpath('//payment/@amount'),
+    'order_id'  => $order_id,
+    'timestamp' => $timestamp,
+    'amount'    => $amount,
   ));
 }
 
