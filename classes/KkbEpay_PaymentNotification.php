@@ -25,7 +25,7 @@ class KkbEpay_PaymentNotification
       $this->_timestamp = $params['timestamp'];
     }
     if (isset($params['amount'])) {
-      $this->_amount = $params['amount'];
+      $this->_amount = (double) $params['amount'];
     }
   }
 
