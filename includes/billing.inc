@@ -203,7 +203,7 @@ function kkb_epay_bank_response_document_parse($document) {
     $timestamp = strtotime((string) $elem->order_id);
   }
 
-  $xpath = $xml->xpath('//payment/@amoun');
+  $xpath = $xml->xpath('//payment/@amount');
   if ($elem = array_shift($xpath)) {
     $amount = (string) $elem->amount;
   }
