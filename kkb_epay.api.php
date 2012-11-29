@@ -6,6 +6,11 @@
  */
 
 /**
+ * @addtogroup hooks
+ * @{
+ */
+
+/**
  * Receive payment, mark orders as payed, provide access to services.
  *
  * This hook is called only when the processing center sends a correct
@@ -135,4 +140,8 @@ function hook_form_kkb_epay_billing_statement_alter(&$form, &$form_state) {
   }
   $form['actions']['submit']['#attributes']['class'] = array('special-style');
 }
+
+/**
+ * @} End of "addtogroup hooks".
+ */
 
