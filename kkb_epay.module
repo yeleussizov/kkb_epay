@@ -97,7 +97,7 @@ function kkb_epay_debug_status() {
  */
 function kkb_epay_init() {
   if (kkb_epay_debug_status()) {
-    drupal_set_message(t('KKB Epay debugging mode is turned on. All payments will be successful, but clients will not be billed.'), 'warning');
+    drupal_set_message(t('KKB Epay debugging mode is turned on. Payment is only possible with special bank cards.'), 'warning');
   }
 }
 
