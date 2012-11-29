@@ -17,4 +17,5 @@ Planned features and improvements:
 14. Create kkb_epay_commerce module;
 15. Add module description.
 16. Add licencing and copyright information.
+17. Logging is not verbose enough;
 
