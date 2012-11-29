@@ -49,7 +49,7 @@ function kkb_epay_callback_back_failure($id) {
  * Menu page callback. Handles success response from the processing center.
  */
 function kkb_epay_callback_post_success() {
-  module_load_include('inc', 'kkb_epay', 'billing');
+  module_load_include('inc', 'kkb_epay', 'includes/billing');
   if (empty($_POST['response'])) {
     echo '0';
     drupal_exit();
@@ -68,7 +68,7 @@ function kkb_epay_callback_post_success() {
  * Menu page callback. Handles failure response from the processing center.
  */
 function kkb_epay_callback_post_failure() {
-  module_load_include('inc', 'kkb_epay', 'billing');
+  module_load_include('inc', 'kkb_epay', 'includes/billing');
   // TODO
   echo '0';
 }

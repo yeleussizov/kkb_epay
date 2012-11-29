@@ -34,7 +34,7 @@
  *   Complete definition of a billing form in as Drupal's renderable array.
  */
 function kkb_epay_billing_statement($form, &$form_state, KkbEpay_Order $order, $account) {
-  module_load_include('inc', 'kkb_epay', 'billing');
+  module_load_include('inc', 'kkb_epay', 'includes/billing');
 
   $form['#action']  = kkb_epay_processing_gateway_url();
   $form['#method']  = 'post';
@@ -125,7 +125,7 @@ function kkb_epay_menu() {
     'page arguments'   => array('kkb_epay_admin_debug_form'),
     'access callback'  => 'user_access',
     'access arguments' => array('administer kkb_epay'),
-    'file'             => 'kkb_epay.admin.inc',
+    'file'             => 'includes/kkb_epay.admin.inc',
     'type'             => MENU_NORMAL_ITEM,
   );
 
@@ -136,7 +136,7 @@ function kkb_epay_menu() {
     'page arguments'   => array('kkb_epay_admin_private_key_form'),
     'access callback'  => 'user_access',
     'access arguments' => array('administer kkb_epay'),
-    'file'             => 'kkb_epay.admin.inc',
+    'file'             => 'includes/kkb_epay.admin.inc',
     'type'             => MENU_NORMAL_ITEM,
   );
 
@@ -146,7 +146,7 @@ function kkb_epay_menu() {
     'page callback'    => 'kkb_epay_admin_private_key_save_page',
     'access callback'  => 'user_access',
     'access arguments' => array('administer kkb_epay'),
-    'file'             => 'kkb_epay.admin.inc',
+    'file'             => 'includes/kkb_epay.admin.inc',
     'type'             => MENU_CALLBACK,
   );
 
@@ -155,7 +155,7 @@ function kkb_epay_menu() {
     'page callback'    => 'kkb_epay_callback_back_success',
     'page arguments'   => array(3),
     'access callback'  => TRUE,
-    'file'             => 'callbacks.inc',
+    'file'             => 'includes/callbacks.inc',
     'type'             => MENU_CALLBACK,
   );
 
@@ -164,7 +164,7 @@ function kkb_epay_menu() {
     'page callback'    => 'kkb_epay_callback_back_failure',
     'page arguments'   => array(3),
     'access callback'  => TRUE,
-    'file'             => 'callbacks.inc',
+    'file'             => 'includes/callbacks.inc',
     'type'             => MENU_CALLBACK,
   );
 
@@ -172,7 +172,7 @@ function kkb_epay_menu() {
     'title'            => 'Payment was successful',
     'page callback'    => 'kkb_epay_callback_post_success',
     'access callback'  => TRUE,
-    'file'             => 'callbacks.inc',
+    'file'             => 'includes/callbacks.inc',
     'type'             => MENU_CALLBACK,
   );
 
@@ -180,7 +180,7 @@ function kkb_epay_menu() {
     'title'            => 'Payment failed',
     'page callback'    => 'kkb_epay_callback_post_failure',
     'access callback'  => TRUE,
-    'file'             => 'callbacks.inc',
+    'file'             => 'includes/callbacks.inc',
     'type'             => MENU_CALLBACK,
   );
 
