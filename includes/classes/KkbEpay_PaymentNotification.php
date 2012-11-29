@@ -15,6 +15,10 @@ class KkbEpay_PaymentNotification
 
   protected $_amount;
 
+  protected $_reference;
+
+  protected $_approval_code;
+
 
   public function __construct(array $params = array())
   {
@@ -26,6 +30,12 @@ class KkbEpay_PaymentNotification
     }
     if (isset($params['amount'])) {
       $this->_amount = (double) $params['amount'];
+    }
+    if (isset($params['reference'])) {
+      $this->_reference = $params['reference'];
+    }
+    if (isset($params['approval_code'])) {
+      $this->_approval_code = $params['approval_code'];
     }
   }
 
@@ -56,6 +66,16 @@ class KkbEpay_PaymentNotification
   public function getAmount()
   {
     return $this->_amount;
+  }
+
+  public function getReference()
+  {
+    return $this->_reference;
+  }
+
+  public function getApprovalCode()
+  {
+    return $this->_approval_code;
   }
 
 }
