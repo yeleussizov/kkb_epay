@@ -192,6 +192,8 @@ function kkb_epay_bank_response_document_parse($document) {
   $order_id  = 0;
   $timestamp = REQUEST_TIME;
   $amount    = 0.0;
+  $reference = NULL;
+  $approval  = NULL;
 
   $xpath = $xml->xpath('//order/@order_id');
   if ($elem = array_shift($xpath)) {
@@ -208,10 +210,22 @@ function kkb_epay_bank_response_document_parse($document) {
     $amount = (string) $elem->amount;
   }
 
+  $xpath = $xml->xpath('//payment/@reference');
+  if ($elem = array_shift($xpath)) {
+    $reference = (string) $elem->reference;
+  }
+
+  $xpath = $xml->xpath('//payment/@approval_code');
+  if ($elem = array_shift($xpath)) {
+    $approval = (string) $elem->approval_code;
+  }
+
   return new KkbEpay_PaymentNotification(array(
-    'order_id'  => $order_id,
-    'timestamp' => $timestamp,
-    'amount'    => $amount,
+    'amount'        => $amount,
+    'approval_code' => $approval,
+    'order_id'      => $order_id,
+    'reference'     => $reference,
+    'timestamp'     => $timestamp,
   ));
 }
 
