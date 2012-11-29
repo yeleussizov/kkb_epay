@@ -15,7 +15,7 @@ Planned features and improvements:
 12. <del>Write API usage examples</del>;
 13. Create kkb_epay_ubercart module;
 14. Create kkb_epay_commerce module;
-15. Add module description.
-16. Add licencing and copyright information.
+15. Add module description;
+16. Add licencing and copyright information;
 17. Logging is not verbose enough;
 
