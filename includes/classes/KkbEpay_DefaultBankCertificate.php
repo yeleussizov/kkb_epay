@@ -8,43 +8,65 @@
  * the server.
  *
  * This certificate was obtained from a package that is provided to all
- * Epay clients. The package consisted of this certificate, client's
+ * Epay clients. The package consists of this certificate, client's
  * private key, example PHP-code and some documentation.
  *
- * This certificate can be stored in source code because, in essence,
- * it is a public key which can be shared with any party, unlike a private
- * key that must be kept in complete secret.
+ * This certificate can be stored in the source code tree because, in essence,
+ * it is a public key that can be shared with any party, unlike a private
+ * key, which must be kept in a complete secret.
  */
 class KkbEpay_DefaultBankCertificate implements KkbEpay_BankCertificateInterface
 {
 
+  protected $_filepath;
+
+
+  public function __construct($filepath = NULL)
+  {
+    if (isset($filepath)) {
+      $this->setCertificateFilepath($filepath);
+    }
+  }
+
+  /**
+   * Implements KkbEpay_BankCertificateInterface::getCertificate().
+   */
   public function getCertificate()
   {
-    $certificate = <<<EOF
------BEGIN CERTIFICATE-----
-MIIDijCCAnKgAwIBAgIFAMGDJ+gwDQYJKoZIhvcNAQEEBQAwUzELMAkGA1UEBhMC
-S1oxDDAKBgNVBAoTA0tLQjELMAkGA1UECxMCQ0ExDzANBgNVBAMTBktLQiBDQTEY
-MBYGCSqGSIb3DQEJARYJY2FAa2tiLmt6MB4XDTA0MTAxODEwMzYwNloXDTA5MTAx
-NzEwMzYwNlowgYMxCzAJBgNVBAYTAktaMQ8wDQYDVQQHEwZBbG1hdHkxHDAaBgNV
-BAoTE0pTQyBLYXprb21tZXJ0c2JhbmsxEzARBgNVBAsTCkhlYWRPZmZpY2UxFDAS
-BgNVBAMTC0VQQVkgU1lTVEVNMRowGAYJKoZIhvcNAQkBFgtlcGF5QGtrYi5rejCB
-nzANBgkqhkiG9w0BAQEFAAOBjQAwgYkCgYEAwNtnbUr82ALmO1E0tQ8Ejp1D+9GH
-EKPeqVTokLb95VhvXX3GoYCKPseFvXMD8x+P0I9x03nJnSRyP6hJ85W/jsElkuYj
-LzYWFfYhCeCQgit2lbSx9FbGVJ1B7M4ZMYuub4DlgtjQ8ebbqRACZ3Yw7LhciUcS
-235c4K+zmL7p5i0CAwEAAaOBtzCBtDAdBgNVHQ4EFgQU+7GVWbXvHRDbdxFSXqc6
-vd6VPQcwHwYDVR0jBBgwFoAU712nYyivxvN+d0LbneCElQZ9clMwDAYDVR0TBAUw
-AwEBADAOBgNVHQ8BAf8EBAMCBPAwNQYDVR0fBC4wLDAqoCigJoYkaHR0cDovL3d3
-dy5ra2Iua3ovY2VydHJvb3Qva2tiY2EuY3JsMB0GA1UdJQQWMBQGCCsGAQUFBwMC
-BggrBgEFBQcDBDANBgkqhkiG9w0BAQQFAAOCAQEAB0jZpXUO9O0uWJZAJP28ATnC
-PCMYa9jheM8MwKhSqe0m1IQ8mkPBzFnKqgmBdyPSp94Fy6xY2ciEnJ5oCEJGM9Nm
-L1kUeg4/HqiTcEUaZWtec4SvwEhKjfoXVwx/teV9KNQoQ8YNyQflEm6DMjiZ6GDM
-qLNV2ZLD5RytWKJYzqg/WScKpuGHYBlUmAi75Ew4nNx1PXi0ATZ9wc0aiXYlwAaP
-pDhNvvLcVLiBjjs/o/QhBgtKewAbltVnU97gf/+yQErbfrL2z+Hg4hF0R63vkjj5
-HsxOZ+pVNi0p+TzKyI1QcS4f53rxo0pMYxHn0LJQquCzbyDKcipkg9qrAFkxoA==
------END CERTIFICATE-----
-EOF;
+    $file = $this->getCertificateFilepath();
+    return trim(file_get_contents($file));
+  }
 
-    return trim($certificate);
+  /**
+   * Returns configured path to the PEM-encoded file with the certificate.
+   *
+   * By default, certificate file is searched using relative path to this
+   * file, but its location can be changed with setCertificateFilepath().
+   *
+   * @note
+   *   Certificate body cannot be included directly into this file because this
+   *   file is licenced under GPL and cannot include binary blobs. Encoded PEM
+   *   certificate is such binary blob. Furthermore, copyright status of the
+   *   certificate is not clear.
+   */
+  public function getCertificateFilepath()
+  {
+    if (!isset($this->_filepath)) {
+      $this->setCertificateFilepath(__DIR__ . '/../../data/kkb_certificate.pem');
+    }
+    return $this->_filepath;
+  }
+
+  /**
+   * Changes path to the PEM-encoded cetrificate file.
+   */
+  public function setCertificateFilepath($filepath)
+  {
+    if (!is_file($filepath) || !is_readable($filepath)) {
+      throw new KkbEpay_Exception('File with default bank certificate cannot be read.');
+    }
+    $this->_filepath = $filepath;
+    return $this;
   }
 
 }
