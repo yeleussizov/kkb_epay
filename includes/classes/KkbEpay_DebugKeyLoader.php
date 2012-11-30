@@ -9,6 +9,7 @@ class KkbEpay_DebugKeyLoader implements KkbEpay_KeyLoaderInterface
 {
 
   protected $_debug = FALSE;
+  protected $_filepath;
 
 
   public function getKey()
@@ -22,7 +23,7 @@ class KkbEpay_DebugKeyLoader implements KkbEpay_KeyLoaderInterface
     $key->setMerchantName('Demo sShop');
     $key->setMerchantId('92061101');
     $key->setPassword('nissan');
-    $key->setKey($this->_getKeyString());
+    $key->setKey(trim(file_get_contents($this->getKeyFilepath())));
 
     return $key;
   }
@@ -37,24 +38,35 @@ class KkbEpay_DebugKeyLoader implements KkbEpay_KeyLoaderInterface
     return TRUE;
   }
 
-
-  private function _getKeyString()
+  /**
+   * Returns configured path to the PEM-encoded file with the private key.
+   *
+   * By default, private key file is searched using relative path to this
+   * file, but its location can be changed with setKeyFilepath().
+   *
+   * @note
+   *   Private key body cannot be included directly into this file because this
+   *   file is licenced under GPL and cannot include binary blobs. Encoded PEM
+   *   key is such binary blob. Furthermore, its copyright status is not clear.
+   */
+  public function getKeyFilepath()
   {
-    $key = <<<EOF
------BEGIN RSA PRIVATE KEY-----
-Proc-Type: 4,ENCRYPTED
-DEK-Info: DES-EDE3-CBC,25E4520A4E5EE17A
+    if (!isset($this->_filepath)) {
+      $this->setCertificateFilepath(__DIR__ . '/../../data/debug_private_key.pem');
+    }
+    return $this->_filepath;
+  }
 
-r1Uz/b1FZpMJg0kh2efZoaXpLnEg9xR8rkU8nH5y5LTP7q15zldAWm0BqGax6ZHm
-5xe/zTjFcZKYjh7NeINlTKrAnbNNYZnYxqqj9GGUa1gEpvHn8TukXB83cEbvsDeS
-jrbvbj5itRqqa9fNNs4rzizVdaGFpQKVhCqx4u7lE8oWdR1WCUHOywpFpkpHznDr
-od/B2JSzG6OekuwCB4tnyZmJ1RYncbsM7NysOGcUZcT9ZmfzteYkVjPxZKcHzjTr
-pLzhlYeAr0by9jNhtodGaYoRHEs2cqK8zEPBRMmgDydVA9Fg2NIIDaBB7ugdjaUw
-XuWUo1y5JrU0hRnB7FdAEizO1g5CNG5aZ5UDcg9jbNeKEqrZy2VcBKARYxVDUIlm
-INB98tXargbAgbCRwKvn76m8R0ClBMlIHiMzP3LCTfQaJnCIIDirfA==
------END RSA PRIVATE KEY-----
-EOF;
-    return trim($key);
+  /**
+   * Changes path to the PEM-encoded private key file.
+   */
+  public function setKeyFilepath($filepath)
+  {
+    if (!is_file($filepath) || !is_readable($filepath)) {
+      throw new KkbEpay_Exception('File with debug private key cannot be read.');
+    }
+    $this->_filepath = $filepath;
+    return $this;
   }
 
 }
