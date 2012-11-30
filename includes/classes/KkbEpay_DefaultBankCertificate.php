@@ -52,7 +52,8 @@ class KkbEpay_DefaultBankCertificate implements KkbEpay_BankCertificateInterface
   public function getCertificateFilepath()
   {
     if (!isset($this->_filepath)) {
-      $this->setCertificateFilepath(__DIR__ . '/../../data/kkb_certificate.pem');
+      $default_path = __DIR__ . '/../../data/kkb_certificate.pem';
+      $this->setCertificateFilepath($default_path);
     }
     return $this->_filepath;
   }
