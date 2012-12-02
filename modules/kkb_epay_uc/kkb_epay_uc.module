@@ -76,6 +76,9 @@ function kkb_epay_uc_redirect($form, &$form_state, stdClass $uc_order) {
   }
 
   $statement = drupal_get_form('kkb_epay_billing_statement', $epay_order, $account);
+  $url = url('cart/checkout/complete', array('absolute' => TRUE));
+  $statement['BackLink']['#value'] = $url;
+  $statement['FailureBackLink']['#value'] = $url;
   return $statement;
 }
 
