@@ -54,6 +54,32 @@ function kkb_epay_uc_method_callback($op, &$order, $form = NULL, &$form_state = 
 }
 
 /**
+ * Form builder. Creates redirect form that is displayed after an order is
+ * formed and is ready to be payed.
+ */
+function kkb_epay_uc_redirect($form, &$form_state, stdClass $uc_order) {
+  if ($uc_order->currency != 'KZT') {
+    _kkb_epay_uc_unsupported_currency_warn($uc_order);
+    _kkb_epay_uc_unsupported_currency_log($uc_order);
+    return array();
+  }
+
+  $account = user_load($uc_order->uid);
+  $epay_order = new KkbEpay_Order($uc_order->order_id);
+  $epay_order->setTengeAmount($uc_order->order_total);
+
+  foreach ($uc_order->products as $p) {
+    $epay_order->addItem(new KkbEpay_OrderItem($p->title, $p->price * $p->qty, $p->qty));
+  }
+  foreach ($uc_order->line_items as $i) {
+    $epay_order->addItem(new KkbEpay_OrderItem($i['title'], $i['amount']));
+  }
+
+  $statement = drupal_get_form('kkb_epay_billing_statement', $epay_order, $account);
+  return $statement;
+}
+
+/**
  * Creates an errors message for user to inform that an order uses a currency
  * that cannot be processed by the Epay gateway.
  */
