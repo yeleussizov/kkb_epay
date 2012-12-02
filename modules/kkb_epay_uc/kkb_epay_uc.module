@@ -59,7 +59,7 @@ function kkb_epay_uc_method_callback($op, &$order, $form = NULL, &$form_state = 
  */
 function _kkb_epay_uc_unsupported_currency_warn($order) {
   $message = t(
-    'Unable to process this order. Epay can accept payments only in Tenge. The currency of this order is %c.',
+    'This order cannot be payed with Epay processing center. Epay can accept payments only in Tenge. The currency of this order is %c.',
     array('%c' => $order->currency)
   );
   drupal_set_message($message, 'error');
