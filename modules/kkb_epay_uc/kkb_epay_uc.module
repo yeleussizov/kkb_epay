@@ -23,3 +23,21 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+/**
+ * Implements hook_uc_payment_method().
+ */
+function kkb_epay_uc_uc_payment_method() {
+  $methods['kkb_epay'] = array(
+    'name'       => t('KKB Epay'),
+    'title'      => t('KKB Epay credit card processing center'),
+    'desc'       => t('Pay with our bank cart securely at the <a href="https://epay.kkb.kz/">https://epay.kkb.kz/</a> processing center.'),
+    'callback'   => 'kkb_epay_uc_method_callback',
+    'weight'     => 1,
+    'checkout'   => TRUE,
+    'no_gateway' => TRUE,
+    'redirect'   => 'kkb_epay_uc_redirect',
+  );
+
+  return $methods;
+}
+
