@@ -1,0 +1,10 @@
+;
+
+name = Ubercart KKB Epay
+description = Allows KKB Epay gateway to be used to pay for Ubercart orders.
+core = 7.x
+package = Ubercart - payment
+
+dependencies[] = kkb_epay
+dependencies[] = uc_payment
+
