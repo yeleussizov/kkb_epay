@@ -74,7 +74,7 @@ class KkbEpay_DebugKeyLoader implements KkbEpay_KeyLoaderInterface
   {
     if (!isset($this->_filepath)) {
       $default_path = __DIR__ . '/../../data/debug_private_key.pem';
-      $this->setCertificateFilepath($default_path);
+      $this->setKeyFilepath($default_path);
     }
     return $this->_filepath;
   }
