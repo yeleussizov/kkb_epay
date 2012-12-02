@@ -41,3 +41,39 @@ function kkb_epay_uc_uc_payment_method() {
   return $methods;
 }
 
+/**
+ * Implements hook_uc_payment_method_callback().
+ */
+function kkb_epay_uc_method_callback($op, &$order, $form = NULL, &$form_state = NULL) {
+  if ($op == 'cart-process') {
+    if ($order->currency != 'KZT') {
+      _kkb_epay_uc_unsupported_currency_warn($order);
+      return FALSE;
+    }
+  }
+}
+
+/**
+ * Creates an errors message for user to inform that an order uses a currency
+ * that cannot be processed by the Epay gateway.
+ */
+function _kkb_epay_uc_unsupported_currency_warn($order) {
+  $message = t(
+    'Unable to process this order. Epay can accept payments only in Tenge. The currency of this order is %c.',
+    array('%c' => $order->currency)
+  );
+  drupal_set_message($message, 'error');
+}
+
+/**
+ * Logs an attempt to use Epay to pay for an order in unsupported currency.
+ */
+function _kkb_epay_uc_unsupported_currency_log($order) {
+  watchdog(
+    'kkb_epay',
+    'An order in unsupported currency %c could not be processed by Epay.',
+    array('%c' => $uc_order->currency),
+    WATCHDOG_CRITICAL
+  );
+}
+
