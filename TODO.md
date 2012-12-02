@@ -18,4 +18,5 @@ Planned features and improvements:
 15. Add module description;
 16. <del>Add licencing and copyright information</del>;
 17. Logging is not verbose enough;
+18. Create integration with http://drupal.org/project/payment;
 
