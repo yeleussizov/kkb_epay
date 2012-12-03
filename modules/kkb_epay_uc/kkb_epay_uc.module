@@ -77,7 +77,8 @@ function kkb_epay_uc_redirect($form, &$form_state, stdClass $uc_order) {
 
   $statement = drupal_get_form('kkb_epay_billing_statement', $epay_order, $account);
 
-  $url = url('cart/checkout/complete', array('absolute' => TRUE, 'query' => array(
+  // Add unique token for better security.
+  $url = url('epay/back/success/' . $uc_order->order_id, array('absolute' => TRUE, 'query' => array(
     'token' => drupal_get_token('payment for order ' . $uc_order->order_id),
   )));
   $statement['BackLink']['#value'] = $url;
