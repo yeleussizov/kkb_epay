@@ -60,7 +60,7 @@ class KkbEpay_Order
     if (!preg_match('/^[0-9]+$/', $id)) {
       throw new KkbEpay_Exception('Order ID can consist only of digits.');
     }
-    $this->_order_id = str_pad($id, 6, '0', STR_PAD_LEFT);
+    $this->_id = str_pad($id, 6, '0', STR_PAD_LEFT);
     return $this;
   }
 
@@ -103,7 +103,7 @@ class KkbEpay_Order
 
   public function getId()
   {
-    return $this->_order_id;
+    return $this->_id;
   }
 
   public function getAmount()
