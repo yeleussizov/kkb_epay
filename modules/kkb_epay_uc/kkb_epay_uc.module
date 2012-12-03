@@ -87,6 +87,39 @@ function kkb_epay_uc_redirect($form, &$form_state, stdClass $uc_order) {
 }
 
 /**
+ * Implements hook_kkb_epay_payment().
+ *
+ * In order to preserve Ubercart's autologin functionality after checkout,
+ * payment of an order cannot be directly saved here.
+ *
+ * New account for user is created and user can be logged in only during the
+ * same request when the order payment is saved. This is a peculiarity of
+ * Ubercart's API.
+ *
+ * So, payment confirmation must be saved in a special field inside of order
+ * object. It will be really saved when user returnes back to the site on the
+ * 'success' page.
+ */
+function kkb_epay_uc_kkb_epay_payment(KkbEpay_PaymentNotification $notification) {
+  $order = uc_order_load($notification->getOrderId());
+  if ($order && empty($order->data['kkb_epay_payment_confirmation']['saved'])) {
+    $order->data['kkb_epay_payment_confirmation'] = array(
+      'saved'     => FALSE,
+      'reference' => $notification->getReference(),
+      'amount'    => $notification->getAmount(),
+      'timestamp' => $notification->getTimestamp(),
+    );
+    uc_order_save($order);
+
+    $message = t(
+      'Payment for the order has been received. Payment reference number is %s.',
+      array('%s' => $notification->getReference())
+    );
+    uc_order_comment_save($order->order_id, $order->uid, $message, 'order', $order->order_status, TRUE);
+  }
+}
+
+/**
  * Creates an errors message for user to inform that an order uses a currency
  * that cannot be processed by the Epay gateway.
  */
