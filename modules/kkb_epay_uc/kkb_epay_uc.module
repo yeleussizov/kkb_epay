@@ -5,6 +5,8 @@
  *   Integration of kkb_epay module with Ubercart's payments system.
  *
  * Copyright (C) 2012, Victor Nikulshin
+ * Copyright (C) 2012, Chris Oden <wodenx@gmail.com>
+ * Copyright (C) 2010, Lyle Mantooth <lyle@ubercart.org>
  *
  * This file is part of KKB Epay.
  *
