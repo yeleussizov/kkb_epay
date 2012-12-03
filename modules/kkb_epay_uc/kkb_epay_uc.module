@@ -120,6 +120,35 @@ function kkb_epay_uc_kkb_epay_payment(KkbEpay_PaymentNotification $notification)
 }
 
 /**
+ * Implements hook_kkb_epay_success_page().
+ *
+ * User has come back to the site. It is now ok to save information about
+ * payment with appropriate API and, at the same time, create new account
+ * for user or perform autologin.
+ */
+function kkb_epay_uc_kkb_epay_success_page($id) {
+  $id = (int) $id;
+  $token_value = 'payment for order ' . $id;
+
+  if (!empty($_GET['token']) && drupal_valid_token(strval($_GET['token']), $token_value)) {
+    $order = uc_order_load($id);
+
+    if (!empty($order->data['kkb_epay_payment_confirmation'])) {
+      if (!$order->data['kkb_epay_payment_confirmation']['saved']) {
+        $confirmation = $order->data['kkb_epay_payment_confirmation'];
+        $order->data['kkb_epay_payment_confirmation']['saved'] = TRUE;
+        uc_order_save($order);
+
+        return _kkb_epay_uc_complete_sale($order);
+      }
+    }
+  }
+}
+
+function _kkb_epay_uc_complete_sale($order) {
+}
+
+/**
  * Creates an errors message for user to inform that an order uses a currency
  * that cannot be processed by the Epay gateway.
  */
