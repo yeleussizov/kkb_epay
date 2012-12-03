@@ -145,7 +145,45 @@ function kkb_epay_uc_kkb_epay_success_page($id) {
   }
 }
 
+/**
+ * Completes the order checkout, saves payment confirmation, adds comments to
+ * the comment, logges user in (if autologin is enabled for new users),
+ * builds success page, and optionaly redirects user somewhere else (if
+ * Ubercart is configured to redirect).
+ *
+ * This helper mostly simulates the work of the uc_cart_checkout_complete()
+ * function (it is located in uc_cart.pages.inc file), which is the last step
+ * of the order checkout and where most of the listed actions are performed.
+ *
+ * Unfortunately, it is impossible to hook into uc_cart_checkout_complete();
+ * in order to save payment we have to dublicate its body and call
+ * uc_payment_enter() at the right moment.
+ *
+ * Actions that are executed inside of uc_cart_checkout_complete(), such as
+ * autologin, are Ubercart's features and users expect them to work properly.
+ * That is why it is vert important to preserve its functionality.
+ */
 function _kkb_epay_uc_complete_sale($order) {
+  $build = uc_cart_complete_sale($order, variable_get('uc_new_customer_login', FALSE));
+  unset($_SESSION['uc_checkout'][$order->order_id], $_SESSION['cart_order']);
+
+  // Add a comment to let sales team know this came in through the site.
+  uc_order_comment_save($order->order_id, 0, t('Order created through website.'), 'admin');
+
+  $id = $order->order_id;
+  $amount = $confirmation['amount'];
+  $msg = t(
+    'Order has been payed with KKB Epay. Payment reference number is %reference',
+    array('%reference' => $confirmation['reference'])
+  );
+  $time = $confirmation['timestamp'];
+  uc_payment_enter($id, 'kkb_epay', $amount, 0, $confirmation, $msg, $time);
+
+  $page = variable_get('uc_cart_checkout_complete_page', '');
+  if (!empty($page)) {
+    drupal_goto($page);
+  }
+  return $build;
 }
 
 /**
