@@ -1,0 +1,247 @@
+# $Id$
+#
+# KKB EBAY translation package.
+# Copyright (C) Serik Yeleussizov
+# This file is distributed under the same license as the PACKAGE package.
+# Serik Yeleussizov <s.yeleussizov@gmail.com>, 2012-12-06 12:20+0600.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"POT-Creation-Date: 2012-12-06 12:20+0600\n"
+"PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
+"Last-Translator: Serik Yeleussizov <s.yeleussizov@gmail.com>\n"
+"Language-Team: RU <s.yelessizov@gmail.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+
+#: kkb_epay.module:95
+msgid "Proceed to payment"
+msgstr ""
+
+#: kkb_epay.module:118
+msgid "KKB Epay debugging mode is turned on. Payment is only possible with special bank cards."
+msgstr ""
+
+#: kkb_epay.module:130
+msgid "KKB Epay payments gateway configuration."
+msgstr ""
+
+#: kkb_epay.module:141
+msgid "Choose to send payments to a live gateway or a sandbox."
+msgstr ""
+
+#: kkb_epay.module:152
+msgid "Check the existing or add a new private key."
+msgstr ""
+
+#: kkb_epay.module:163
+msgid "Save imported private key into configuration file."
+msgstr ""
+
+#: kkb_epay.module:214
+msgid "Administer KKB Epay configuration"
+msgstr ""
+
+#: kkb_epay.module:215
+msgid "Manage private keys and payments debugging mode."
+msgstr ""
+
+#: kkb_epay.module:129 kkb_epay.info:0 modules/kkb_epay_uc/kkb_epay_uc.module:33
+msgid "KKB Epay"
+msgstr ""
+
+#: kkb_epay.module:140
+msgid "KKB Epay debugging mode"
+msgstr ""
+
+#: kkb_epay.module:151;162
+msgid "KKB Epay private key configuration"
+msgstr ""
+
+#: kkb_epay.module:172;190
+msgid "Payment was successful"
+msgstr ""
+
+#: kkb_epay.module:181;198
+msgid "Payment failed"
+msgstr ""
+
+#: (duplicate) kkb_epay.install:36 
+msgid "OpenSSL extension"
+msgstr ""
+
+#: (duplicate) kkb_epay.install:37 
+msgid "This module requires OpenSSL extension to secure transactions, but it was not found."
+msgstr ""
+
+#: (duplicate) kkb_epay.install:49 ;60 
+msgid "KKB Epay private key"
+msgstr ""
+
+#: (duplicate) kkb_epay.install:50 
+msgid "Private key loaded. Merchant ID is %id."
+msgstr ""
+
+#: (duplicate) kkb_epay.install:61 
+msgid "Private key is not found. You will not be able to receive payments without a private key. You can <a href=\"@url\">configure it right now</a>."
+msgstr ""
+
+#: kkb_epay.info:0
+msgid "Processes payments with the KKB 'Epay' authorization server - https://epay.kkb.kz/."
+msgstr ""
+
+#: kkb_epay.info:0
+msgid "Other"
+msgstr ""
+
+#: includes/billing.inc:51
+msgid "Private key could not be loaded. Message will not be signed."
+msgstr ""
+
+#: includes/billing.inc:60
+msgid "There is a problem with the key, message was not signed. Check logs for details."
+msgstr ""
+
+#: includes/billing.inc:89
+msgid "There is a problem with the certificate. Check logs for details."
+msgstr ""
+
+#: includes/callbacks.inc:34
+msgid "<strong>Thank you, you payment was successfully accepted.</strong>"
+msgstr ""
+
+#: includes/callbacks.inc:39;59
+msgid "Back to front page."
+msgstr ""
+
+#: includes/callbacks.inc:54
+msgid "<strong>Unfortunately your payment was not completed.</strong>"
+msgstr ""
+
+#: includes/kkb_epay.admin.inc:34
+msgid "Put KKB Epay module into debugging mode"
+msgstr ""
+
+#: includes/kkb_epay.admin.inc:36
+msgid "When debugging mode is turned on, all payments are processed by a sandbox gateway. Payments can be done only with special testing bank cards. Make sure to turn debugging off as soon as you finish testing. You risk loosing money if real clients make payments while it is on."
+msgstr ""
+
+#: includes/kkb_epay.admin.inc:40
+msgid "Provide your password to save changes:"
+msgstr ""
+
+#: includes/kkb_epay.admin.inc:48
+msgid "Save configuration"
+msgstr ""
+
+#: includes/kkb_epay.admin.inc:65
+msgid "Incorrect password."
+msgstr ""
+
+#: includes/kkb_epay.admin.inc:77
+msgid "Debugging mode has been turned on. Turn it off as soon as possible."
+msgstr ""
+
+#: includes/kkb_epay.admin.inc:80
+msgid "Debugging mode has been turned off."
+msgstr ""
+
+#: includes/kkb_epay.admin.inc:94
+msgid "Certificate ID:"
+msgstr ""
+
+#: includes/kkb_epay.admin.inc:102
+msgid "Merchant name:"
+msgstr ""
+
+#: includes/kkb_epay.admin.inc:110
+msgid "Merchant ID:"
+msgstr ""
+
+#: includes/kkb_epay.admin.inc:118
+msgid "Private key password:"
+msgstr ""
+
+#: includes/kkb_epay.admin.inc:126
+msgid "Private key:"
+msgstr ""
+
+#: includes/kkb_epay.admin.inc:136
+msgid "Import new private key"
+msgstr ""
+
+#: includes/kkb_epay.admin.inc:172
+msgid "There is something wrong with this key. Please, check that the provided information is correct."
+msgstr ""
+
+#: includes/kkb_epay.admin.inc:207
+msgid "<strong>Your private key has been imported, but it was not yet saved.</strong> These instructions will tell you how to do it."
+msgstr ""
+
+#: includes/kkb_epay.admin.inc:212
+msgid "The private key must be kept <strong>in secret</strong> because anyone who has it can perform financial operations on your behalf; for example, debit any credit cards, cancel payments, transfer money from your account, etc."
+msgstr ""
+
+#: includes/kkb_epay.admin.inc:217
+msgid "Copy the code below. Do not modify it! Place it at the end of the <strong>@file</strong> file and save the file."
+msgstr ""
+
+#: includes/kkb_epay.admin.inc:227
+msgid "Place this code into your settings.php file:"
+msgstr ""
+
+#: modules/kkb_epay_example/kkb_epay_example.module:194
+msgid "Order new points"
+msgstr ""
+
+#: modules/kkb_epay_example/kkb_epay_example.module:199
+msgid "Pay for ordered points"
+msgstr ""
+
+#: modules/kkb_epay_uc/kkb_epay_uc.module:34
+msgid "KKB Epay credit card processing center"
+msgstr ""
+
+#: modules/kkb_epay_uc/kkb_epay_uc.module:35
+msgid "Pay with our bank cart securely at the <a href=\"https://epay.kkb.kz/\">https://epay.kkb.kz/</a> processing center."
+msgstr ""
+
+#: modules/kkb_epay_uc/kkb_epay_uc.module:116
+msgid "Payment for the order has been received. Payment reference number is %s."
+msgstr ""
+
+#: modules/kkb_epay_uc/kkb_epay_uc.module:173
+msgid "Order created through website."
+msgstr ""
+
+#: modules/kkb_epay_uc/kkb_epay_uc.module:177
+msgid "Order has been payed with KKB Epay. Payment reference number is %reference"
+msgstr ""
+
+#: modules/kkb_epay_uc/kkb_epay_uc.module:196
+msgid "This order cannot be payed with Epay processing center. Epay can accept payments only in Tenge. The currency of this order is %c."
+msgstr ""
+
+#: modules/kkb_epay_uc/kkb_epay_uc.module:207
+msgid "kkb_epay"
+msgstr ""
+
+#: modules/kkb_epay_uc/kkb_epay_uc.module:207
+msgid "An order in unsupported currency %c could not be processed by Epay."
+msgstr ""
+
+#: modules/kkb_epay_uc/kkb_epay_uc.info:0
+msgid "Ubercart KKB Epay"
+msgstr ""
+
+#: modules/kkb_epay_uc/kkb_epay_uc.info:0
+msgid "Allows KKB Epay gateway to be used to pay for Ubercart orders."
+msgstr ""
+
+#: modules/kkb_epay_uc/kkb_epay_uc.info:0
+msgid "Ubercart - payment"
+msgstr ""
